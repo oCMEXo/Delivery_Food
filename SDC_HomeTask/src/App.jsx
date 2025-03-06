@@ -11,6 +11,7 @@ export default function App() {
                     <li key={index}>{item}</li>
                 ))}
             </ul>
+
         </div>
     );
 }
