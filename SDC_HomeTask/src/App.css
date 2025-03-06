@@ -1,11 +1,59 @@
-#root {
-  max-width: 1280px;
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  max-width: 500px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
 }
 
-li {
-  list-style: none;
+label {
+  text-align: right;
+}
+
+input {
+  width: 100%;
+  max-width: 430px;
+  height: 45px;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.button-wrapper {
+  grid-column: span 2;
+  text-align: center;
+}
+
+button {
+  position: relative; /* Для позиционирования tooltip */
+  background-color: #00c4b4;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #00a89a;
+}
+
+.tooltip {
+  display: none; /* Скрываем по умолчанию */
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+button:hover .tooltip {
+  display: block; /* Показываем при наведении */
 }

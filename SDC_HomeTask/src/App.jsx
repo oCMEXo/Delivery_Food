@@ -1,18 +1,23 @@
-import './App.css'
+import React from 'react';
+import './App.css';
 
-export default function App() {
-    const items = ["item1", "item2", "items", "item4"];
-
+function App() {
     return (
         <div>
-            <h1>Список элементов</h1>
-            <ul>
-                {items.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
+            <form>
+                <label htmlFor="street">Street</label>
+                <input type="text" id="street" name="street" />
+                <label htmlFor="house">House</label>
+                <input type="text" id="house" name="house" />
+                <div className="button-wrapper">
+                    <button type="submit">
+                        Order
+                        <span className="tooltip">Нажмите, чтобы оформить заказ!</span>
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }
 
-
+export default App;
