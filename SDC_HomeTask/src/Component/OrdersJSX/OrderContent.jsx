@@ -39,10 +39,6 @@ export default class OrderMainMenu extends Component {
                             className="phone"> phone</button>
                         our store to place a pickup order. Fast and fresh food.
                     </div>
-                    {/*<div*/}
-                    {/*     className={this.state.isMessageVisible ? 'message' : 'messageNone'}>*/}
-                    {/*    +370453020340*/}
-                    {/*</div>*/}
                     {this.state.isMessageVisible && (
                         <div className="message">+370453020340</div>
                     )}
