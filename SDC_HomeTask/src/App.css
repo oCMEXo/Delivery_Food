@@ -1,59 +1,604 @@
-form {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  list-style: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  --header-color: #28224B;
+  --background-color: #35B8BE;
+  --bacgroundHeader-color: #FFF;
+  --max-width-width: 1440px;
+  --min-width-width: 800px;
+  --main-color: #35B8BE;
+  --color-color: #08090A;
+  --border-color: #DDD;
+}
+
+body {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  max-width: 500px;
-  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  margin: 0 auto  ;
+  max-width: var(--max-width-width);
+  min-width: var(--min-width-width);
+}
+
+.logo {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.contentHeader-Menu {
+  padding: 10px 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.buttonNavigation {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.buttonNavigation a {
+
+  position: relative; /* Нужно для псевдоэлемента */
+  text-decoration: none;
+  border: none;
+  color: var(--header-color);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.buttonNavigation a::after {
+  content: ""; /* Создаём линию */
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Чтобы линия шла по нижнему краю */
+  width: 0%; /* Начинаем с 0 ширины */
+  height: 2px; /* Толщина линии */
+  background-color: black; /* Цвет линии */
+  transition: width 0.5s ease-in-out; /* Плавное появление */
+}
+
+.buttonNavigation a:hover::after {
+  width: 100%; /* Линия полностью появляется */
+}
+
+.yourShopping {
+  width: 55px;
+  height: 55px;
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  img {
+    width: 30px;
+  }
+  i {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    box-shadow: 7px 7px 25px 0 rgba(126, 130, 143, 0.27);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 100%;
+  }
+}
+
+.buttonHeader-Menu {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.mainOrders {
+  width: 100%;
+  /*max-width: var(--max-width-width);*/
+  /*min-width: var(--min-width-width);*/
+  display: flex;
+  flex-direction: column-reverse;
+  height: auto;
+  background-image: url("assets/BG Shape Content.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.yourOderFood {
+  padding-top: 150px;
+}
+
+.yourFood h1 {
+
+  width: 100%;
+  max-width: var(--max-width-width);
+  color: var(--main-color);
+  text-align: center;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 55px; /* 110% */
+  letter-spacing: 1.65px;
+}
+
+.yourFood {
+  align-items: center;
+  padding-top: 45px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.yourFoodItem {
+  align-content: center;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: var(--min-width-width);
+  max-width: 1280px;
+  height: 200px;
+  border-radius: 6px;
+  padding: 40px;
+  background-color: var(--bacgroundHeader-color);
+}
+
+.pictureAndDescription {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  p {
+    color: var(--color-color);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px; /* 111.111% */
+    letter-spacing: 0.6px;
+  }
+}
+
+.costPrice {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+
+  button {
+    background-color: var(--main-color);
+    width: 60px;
+    height: 45px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+  }
+
+  p {
+    color: var(--main-color);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+  }
+}
+
+.size {
+  display: flex; /* Включаем Flexbox */
+  align-items: center; /* Центрируем по вертикали */
+  justify-content: center; /* Центрируем по горизонтали */
+  width: 60px;
+  height: 45px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+form {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr; /* Первый столбец для label, второй для input */
+  column-gap: 50px;
+  row-gap: 20px;
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  max-width: 500px; /* Ограничиваем ширину формы */
+  margin: 0 auto; /* Центрируем форму на странице */
+  padding-bottom: 250px;
 }
 
 label {
-  text-align: right;
+  text-align: right; /* Выравниваем текст по правому краю */
 }
 
 input {
-  width: 100%;
-  max-width: 430px;
+  width: 100%; /* Input занимает всю ширину столбца */
+  max-width: 430px; /* Ограничиваем ширину */
+  border: 1px solid gray !important;
+  border-radius: 4px;
   height: 45px;
-  box-sizing: border-box;
-  border: 1px solid gray;
-  border-radius: 5px;
+  box-sizing: border-box; /* Учитываем padding и border в ширине */
 }
 
-.button-wrapper {
-  grid-column: span 2;
-  text-align: center;
-}
-
-button {
-  position: relative; /* Для позиционирования tooltip */
-  background-color: #00c4b4;
+form button {
+  grid-column: span 2; /* Кнопка занимает обе колонки */
+  justify-self: center; /* Центрируем кнопку внутри её ячейки */
+  background-color: #00c4b4; /* Цвет кнопки как на изображении */
   color: white;
-  border: 1px solid gray;
-  border-radius: 5px;
+  border: none;
   padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
 }
 
-button:hover {
-  background-color: #00a89a;
+form button:hover {
+  background-color: #00a89a; /* Чуть темнее при наведении */
 }
 
-.tooltip {
-  display: none; /* Скрываем по умолчанию */
+footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /*max-width: var(--max-width-width);*/
+  min-width: var(--min-width-width);
+  height: auto;
+  background-color: #F5FBFC;
+  z-index: 1;
+  align-content: center;
+
+
+  background-image: url("assets/points.png");
+  background-size: 100% 100%;
+  /*background-position: center 10%;*/
+  background-repeat: no-repeat;
+
+
+}
+
+.firstLavel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.info {
+  padding-bottom: 100px;
+}
+
+.infoTable {
+  display: flex;
+  gap: 120px;
+
+}
+
+.infoTable li {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: flex-start;
+
+  button {
+    border: none;
+    background-color: unset;
+    color: #546285;
+    cursor: pointer;
+  }
+
+  h6 {
+    color: #08090A;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px; /* 153.846% */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+}
+
+.takeaway {
+
+  p {
+    padding-top: 25px;
+    width: 243px;
+    color: #546285;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 27px; /* 180% */
+    letter-spacing: 0.36px;
+  }
+}
+
+.points {
   position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  white-space: nowrap;
+  /*bottom: 0;*/
+  padding: 139.304px 398.843px 0px 0px;
+  align-items: center;
+  z-index: -1;
+
+  img {
+    width: 100%;
+    max-width: var(--max-width-width);
+    min-width: var(--min-width-width);
+  }
 }
 
-button:hover .tooltip {
-  display: block; /* Показываем при наведении */
+hr {
+  width: 100%;
+  max-width: var(--max-width-width);
+  min-width: var(--min-width-width);
+  height: 0.5px;
+  background-color: rgba(126, 130, 143, 0.09);
+  margin-top: 100px;
+  margin: 0 auto;
+}
+
+.webflow {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max-width-width);
+  min-width: var(--min-width-width);
+  /*padding-top: 100px;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 20px 50px 20px;
+  align-items: center;
+
+}
+
+.links {
+  span {
+    color: var(--main-color);
+    cursor: pointer;
+  }
+}
+
+.messenger {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 1px solid var(--border-color);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mainManu {
+  width: 100%;
+  /*max-width: var(--max-width-width);*/
+  /*min-width: var(--min-width-width);*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 160px;
+  height: auto;
+  background-image: url("assets/BG Shape Content.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.infoPageMenu {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  h1 {
+    color: #35B8BE;
+    text-align: center;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 55px; /* 110% */
+    letter-spacing: 1.65px;
+  }
+}
+
+.labelMenu {
+  width: 460px;
+  color: #546285;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px; /* 168.75% */
+  letter-spacing: 0.36px;
+}
+
+.phone {
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.message {
+  display: block;
+  background-color: #d1f7d1;
+  border: 1px solid #4CAF50;
+  color: #155724;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+  position: absolute;
+  transform: translate(290px, 65px);
+}
+
+.messageNone {
+  display: none;
+  opacity: 0;
+}
+
+
+
+.buttonChoiceEating {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  button {
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+    width: 132px;
+    height: 52px;
+    border-radius: 6px;
+    border: 1px solid rgba(97, 114, 131, 0.20);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #f0f0f0; /* Исходный цвет для кнопок */
+  }
+}
+
+.buttonChoiceEating button.active {
+  background-color: #00a89a;
+  color: white;
+}
+
+.mainManu ul {
+  width: 100%;
+  max-width: var(--max-width-width);
+  display: flex;
+  flex-wrap: wrap; /* Позволяет карточкам переноситься */
+  justify-content: center;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.mainManu ul li {
+  display: flex;
+  align-items: center;
+  max-width: 560px;
+
+  height: 160px;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(53, 184, 190, 0.15);
+  background: #FFF;
+  img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.contentBlog {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ipsum {
+  color: #546285;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.32px;
+}
+
+.nameAndCost {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    color: #35B8BE;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+  }
+}
+
+.sizeAdd {
+  display: flex;
+  gap: 10px;
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 45px;
+    border-radius: 6px;
+    border: 1px solid #DDD;
+    background: #FAFAFA;
+  }
+  button {
+    width: 147px;
+    height: 45px;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 6px;
+    color: #FFF;
+    text-align: center;
+    font-weight: 400;
+    line-height: 27px; /* 168.75% */
+    letter-spacing: 0.36px;
+    cursor: pointer;
+  }
+}
+
+.seeMore {
+  margin-top: 50px;
+  width: 147px;
+  height: 52px;
+  margin-bottom: 150px;
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 6px;
+  color: #FFF;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.36px;
+  cursor: pointer;
+  font-size: 17px;
+  font-style: normal;
+  line-height: 20px; /* 117.647% */
 }
