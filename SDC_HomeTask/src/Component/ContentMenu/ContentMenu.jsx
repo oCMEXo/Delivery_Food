@@ -1,6 +1,5 @@
-import '../../App.css'
-import React, {Component} from "react";
-
+import React, { Component } from "react";
+import '../../App.css';
 
 export class ContentMenuMain extends Component {
     constructor(props) {
@@ -9,12 +8,16 @@ export class ContentMenuMain extends Component {
             error: null,
             isLoaded: false,
             items: [],
-            selectedCategory: []
+            isClicked: false,
+            selectedItemId: null,  // Отслеживаем выбранный элемент
+            expandedTextId: null
+
         };
     }
 
     componentDidMount() {
-        fetch('https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals')
+        const URL_MEALS = 'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals';
+        fetch(URL_MEALS)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -26,47 +29,101 @@ export class ContentMenuMain extends Component {
                 (error) => {
                     this.setState({
                         isLoaded: true,
-                        error
+                        error,
                     });
                 }
             );
     }
 
+    handleItemClick = (id) => {
+        // Меняем фон элемента, обновляя состояние
+        this.setState({ selectedItemId: id });
+    };
+
+    handleTextToggle = (id) => {
+        // Раскрываем или скрываем текст для выбранного элемента
+        this.setState((prevState) => ({
+            expandedTextId: prevState.expandedTextId === id ? null : id
+        }));
+    };
+
+    truncateText = (text, maxLength = 80, id) => {
+        const { expandedTextId } = this.state;
+        if (!text) return "";
+
+        // Если текст не раскрыт, обрезаем
+        if (expandedTextId !== id) {
+            return (
+                <>
+                    {text.length > maxLength ? (
+                        <>
+                            {text.slice(0, maxLength)}{" "}
+                            <button
+                                style={{
+                                    border: 'none',
+                                    backgroundColor: 'transparent',
+                                    cursor: 'pointer',
+                                    color: 'black'
+                                }}
+                                onClick={() => this.handleTextToggle(id)}  // Тоглим раскрытие текста
+                            >
+                                ...
+                            </button>
+                        </>
+                    ) : (
+                        text
+                    )}
+                </>
+            );
+        }
+
+        // Если текст раскрыт, показываем полный текст
+        return text;
+    }
+
 
     render() {
-        const {error, isLoaded, items} = this.state;
+        const { error, isLoaded, items, isClicked} = this.state;
+        const { selectedItemId } = this.state;
+
 
         if (error) {
-            return <p>Error {error.message}</p>;
-        }   else if (!isLoaded){
-            return <p> Loaded... </p>
+            return <p>Error: {error.message}</p>;
+        } else if (!isLoaded) {
+            return <p>Loading...</p>;
         } else {
-
             return (
-                <ul>
-                    {items.map(item => (
-                        <li key={item.id}>
-                            <img src={item.img} alt={`Burger`}/>
-                            <div className="contentBlog">
-                                <div className="nameAndCost">
-                                    <h3>{item.meal}</h3>
-                                    <p>$ {item.price}</p>
+                <>
+                    <ul>
+                        {items.map(item => (
+                            <li key={item.id}
+                                onClick={() => this.handleItemClick(item.id)}  // Обработчик клика
+                                style={{
+                                    height: selectedItemId === item.id ? '100%' : '',
+                                    alignItems: selectedItemId === item.id ? 'start' : '',// Если элемент выбран, меняем фон
+                                }}
+                            >
+                                <img src={item.img} alt={item.meal} />
+                                <div className="contentBlog">
+                                    <div className="nameAndCost">
+                                        <h3>{item.meal}</h3>
+                                        <p>$ {item.price}</p>
+                                    </div>
+                                    <p className="ipsum">
+                                        {this.truncateText(item.instructions, 80, item.id)}
+                                    </p>
+                                    <div className="sizeAdd">
+                                        <p>1</p>
+                                        {/* Кнопка "Add to cart", которая вызывает incrementCart при нажатии */}
+                                        <button>Add to cart</button>
+                                    </div>
                                 </div>
-                                <p className="ipsum">
-                                    {item.instructions}
-                                </p>
-                                <div className="sizeAdd">
-                                    <p>1</p>
-                                    <button>Add to cart</button>
-                                </div>
-                            </div>
-                        </li>
-
-                    ))}
-                </ul>
+                            </li>
+                        ))}
+                    </ul>
+                    <button className="seeMore">See more</button>
+                </>
             );
         }
     }
 }
-
-

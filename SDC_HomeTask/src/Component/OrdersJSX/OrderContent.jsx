@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import '../../App.css';
 import {ContentMenuMain} from "../ContentMenu/ContentMenu.jsx";
 
@@ -12,19 +12,20 @@ export default class OrderMainMenu extends Component {
 
     handClick = (category) => {
         console.log("Выбрана категория:", category);
-        this.setState({ isActive: category });
+        this.setState({isActive: category});
     };
 
     handleMouseEnter = () => {
-        this.setState({ isMessageVisible: true });
+        this.setState({isMessageVisible: true});
     };
 
     handleMouseLeave = () => {
-        this.setState({ isMessageVisible: false });
+        this.setState({isMessageVisible: false});
     };
 
 
     render() {
+        const {products, visibleCards, cartCounts} = this.state;
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
@@ -63,11 +64,10 @@ export default class OrderMainMenu extends Component {
                     </button>
 
                 </div>
-                <ul>
-                    <ContentMenuMain/>
-                </ul>
 
-                <button className="seeMore">See more</button>
+                <ContentMenuMain/>
+
+
             </main>
         );
     }
