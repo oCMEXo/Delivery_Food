@@ -67,7 +67,7 @@ export class ContentMenuMain extends Component {
                                 }}
                                 onClick={() => this.handleTextToggle(id)}  // Тоглим раскрытие текста
                             >
-                                ...
+                                (Read more...)
                             </button>
                         </>
                     ) : (
