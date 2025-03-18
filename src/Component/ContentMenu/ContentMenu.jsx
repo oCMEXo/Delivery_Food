@@ -36,12 +36,10 @@ export class ContentMenuMain extends Component {
     }
 
     handleItemClick = (id) => {
-        // Меняем фон элемента, обновляя состояние
         this.setState({ selectedItemId: id });
     };
 
     handleTextToggle = (id) => {
-        // Раскрываем или скрываем текст для выбранного элемента
         this.setState((prevState) => ({
             expandedTextId: prevState.expandedTextId === id ? null : id
         }));
@@ -51,7 +49,6 @@ export class ContentMenuMain extends Component {
         const { expandedTextId } = this.state;
         if (!text) return "";
 
-        // Если текст не раскрыт, обрезаем
         if (expandedTextId !== id) {
             return (
                 <>
@@ -65,7 +62,7 @@ export class ContentMenuMain extends Component {
                                     cursor: 'pointer',
                                     color: 'black'
                                 }}
-                                onClick={() => this.handleTextToggle(id)}  // Тоглим раскрытие текста
+                                onClick={() => this.handleTextToggle(id)}
                             >
                                 (Read more...)
                             </button>
@@ -77,13 +74,12 @@ export class ContentMenuMain extends Component {
             );
         }
 
-        // Если текст раскрыт, показываем полный текст
         return text;
     }
 
 
     render() {
-        const { error, isLoaded, items, isClicked} = this.state;
+        const { error, isLoaded, items} = this.state;
         const { selectedItemId } = this.state;
 
 
@@ -97,10 +93,10 @@ export class ContentMenuMain extends Component {
                     <ul>
                         {items.map(item => (
                             <li key={item.id}
-                                onClick={() => this.handleItemClick(item.id)}  // Обработчик клика
+                                onClick={() => this.handleItemClick(item.id)}
                                 style={{
                                     height: selectedItemId === item.id ? '100%' : '',
-                                    alignItems: selectedItemId === item.id ? 'start' : '',// Если элемент выбран, меняем фон
+                                    alignItems: selectedItemId === item.id ? 'start' : '',
                                 }}
                             >
                                 <img src={item.img} alt={item.meal} />
@@ -114,7 +110,6 @@ export class ContentMenuMain extends Component {
                                     </p>
                                     <div className="sizeAdd">
                                         <p>1</p>
-                                        {/* Кнопка "Add to cart", которая вызывает incrementCart при нажатии */}
                                         <button>Add to cart</button>
                                     </div>
                                 </div>

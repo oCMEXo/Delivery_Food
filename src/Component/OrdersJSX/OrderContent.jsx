@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
 import '../../App.css';
 import {ContentMenuMain} from "../ContentMenu/ContentMenu.jsx";
+import ButtonEats from "../ContentMenu/ButtonEat.jsx";
 
 export default class OrderMainMenu extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedButton: null
+        }
+    }
 
     state = {
         isActive: null,
         isMessageVisible: false
     };
 
-    handClick = (category) => {
-        console.log("Выбрана категория:", category);
-        this.setState({isActive: category});
-    };
 
     handleMouseEnter = () => {
         this.setState({isMessageVisible: true});
@@ -23,9 +25,17 @@ export default class OrderMainMenu extends Component {
         this.setState({isMessageVisible: false});
     };
 
+    handleButtonClick = (buttonId) => {
+        this.setState({selectedButton: buttonId});
+    };
+
 
     render() {
-        const {products, visibleCards, cartCounts} = this.state;
+        const bd_Order = [
+            {id: 1, text: "Breakfast"},
+            {id: 2, text: "Lunch"},
+            {id: 3, text: "Dinner"}
+        ]
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
@@ -44,25 +54,12 @@ export default class OrderMainMenu extends Component {
                 </div>
 
                 <div className="buttonChoiceEating">
-                    <button
-                        onClick={() => this.handClick('Dessert')}
-                        className={this.state.isActive === 'Dessert' ? 'active' : ''}
-                    >
-                        Dessert
-                    </button>
-                    <button
-                        onClick={() => this.handClick('Dinner')}
-                        className={this.state.isActive === 'Dinner' ? 'active' : ''}
-                    >
-                        Dinner
-                    </button>
-                    <button
-                        onClick={() => this.handClick('Breakfast')}
-                        className={this.state.isActive === 'Breakfast' ? 'active' : ''}
-                    >
-                        Breakfast
-                    </button>
-
+                    {bd_Order.map((button) => (
+                        <ButtonEats key={button.id}
+                                    buttonText={button.text}
+                                    isSelected={this.state.selectedButton === button.id}
+                                    onClick={() => this.handleButtonClick(button.id)}
+                        />))}
                 </div>
 
                 <ContentMenuMain/>
