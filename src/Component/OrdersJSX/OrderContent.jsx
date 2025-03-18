@@ -7,14 +7,16 @@ export default class OrderMainMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedButton: null
+            selectedButton: null,
+            isActive: null,
+            isMessageVisible: false
         }
     }
 
-    state = {
-        isActive: null,
-        isMessageVisible: false
-    };
+    // state = {
+    //     isActive: null,
+    //     isMessageVisible: false
+    // };
 
 
     handleMouseEnter = () => {
