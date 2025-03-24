@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import '../WebPage/Order.css';
-import logo from "../assets/logo.svg";
-import basket from "../assets/resp.svg";
+import '../../public/Order.css';
+import logo from "../../assets/logo.svg";
+import basket from "../../assets/resp.svg";
 
 // Компонент Header принимает cartCount из пропсов
 export default class Header extends Component {
