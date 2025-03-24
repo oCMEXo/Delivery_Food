@@ -1,8 +1,8 @@
 import {Component} from "react";
-import inst from "../assets/inst.svg";
-import Twiterr from "../assets/twitter.svg";
-import youtube  from "../assets/you.svg";
-import logo from "../assets/logo.svg";
+import inst from "../../assets/inst.svg";
+import Twiterr from "../../assets/twitter.svg";
+import youtube  from "../../assets/you.svg";
+import logo from "../../assets/logo.svg";
 
 export default class Footer extends Component {
     render() {

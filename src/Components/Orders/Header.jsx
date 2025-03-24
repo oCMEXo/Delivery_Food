@@ -1,7 +1,7 @@
 import {Component} from "react";
-import '../WebPage/Order.css'
-import logo from "../assets/logo.svg";
-import basket from "../assets/resp.svg";
+import '../../public/Order.css'
+import logo from "../../assets/logo.svg";
+import basket from "../../assets/resp.svg";
 export default class Header extends Component {
     render() {
         return (
