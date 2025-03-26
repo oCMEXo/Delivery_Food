@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import '../../public/Order.css';
-import logo from "../../assets/logo.svg";
-import basket from "../../assets/resp.svg";
 
-// Компонент Header принимает cartCount из пропсов
+
+import Logo from "../../assets/logo.svg";
+import Basket from "../../assets/resp.svg";
+
 export default class Header extends Component {
     render() {
         return (
             <>
                 <header>
                     <div className="contentHeader-Menu">
-                        <button className="logo"><img src={logo} alt="logo" /></button>
+                        <button className="logo"><img src={Logo} alt="logo" /></button>
                         <div className="buttonHeader-Menu">
                             <div className="buttonNavigation">
                                 <a href="#">Home</a>
@@ -19,8 +20,8 @@ export default class Header extends Component {
                                 <a href="#">UserName</a>
                             </div>
                             <button className="yourShopping">
-                                <img src={basket} alt="basket" />
-                                <i>0</i>
+                                <img src={Basket} alt="basket" />
+                                <i>{this.props.count}</i>
                             </button>
                         </div>
                     </div>

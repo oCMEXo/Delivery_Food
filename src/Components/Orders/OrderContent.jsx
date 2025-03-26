@@ -13,12 +13,6 @@ export default class OrderMainMenu extends Component {
         }
     }
 
-    // state = {
-    //     isActive: null,
-    //     isMessageVisible: false
-    // };
-
-
     handleMouseEnter = () => {
         this.setState({isMessageVisible: true});
     };
@@ -33,7 +27,7 @@ export default class OrderMainMenu extends Component {
 
 
     render() {
-        const bd_Order = [
+        const bd_Order_Name = [
             {id: 1, text: "Breakfast"},
             {id: 2, text: "Lunch"},
             {id: 3, text: "Dinner"}
@@ -56,7 +50,7 @@ export default class OrderMainMenu extends Component {
                 </div>
 
                 <div className="buttonChoiceEating">
-                    {bd_Order.map((button) => (
+                    {bd_Order_Name.map((button) => (
                         <ButtonEats key={button.id}
                                     buttonText={button.text}
                                     isSelected={this.state.selectedButton === button.id}
@@ -64,8 +58,7 @@ export default class OrderMainMenu extends Component {
                         />))}
                 </div>
 
-                <ContentMenuMain/>
-
+                <ContentMenuMain incrementCount={this.props.incrementCount} />
 
             </main>
         );

@@ -9,7 +9,7 @@ export class ContentMenuMain extends Component {
             isLoaded: false,
             items: [],
             isClicked: false,
-            selectedItemId: null,  // Отслеживаем выбранный элемент
+            selectedItemId: null,
             expandedTextId: null
 
         };
@@ -110,7 +110,7 @@ export class ContentMenuMain extends Component {
                                     </p>
                                     <div className="sizeAdd">
                                         <p>1</p>
-                                        <button>Add to cart</button>
+                                        <button onClick={this.props.incrementCount} >Add to cart</button>
                                     </div>
                                 </div>
                             </li>
