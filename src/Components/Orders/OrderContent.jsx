@@ -14,7 +14,7 @@ export default class OrderMainMenu extends Component {
         isMessageVisible: false
     };
 
-    handClick = (category) => {
+    handleCategoryChange = (category) => {
         this.setState({ isActive: category });
     };
 
@@ -27,6 +27,7 @@ export default class OrderMainMenu extends Component {
     };
 
     render() {
+        const arrayBurger = [burger1, burger2, burger3, burger4, burger5, burger6];
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
@@ -46,19 +47,19 @@ export default class OrderMainMenu extends Component {
 
                 <div className="buttonChoiceEating">
                     <button
-                        onClick={() => this.handClick('Dessert')}
+                        onClick={() => this.handleCategoryChange('Dessert')}
                         className={this.state.isActive === 'Dessert' ? 'active' : ''}
                     >
                         Dessert
                     </button>
                     <button
-                        onClick={() => this.handClick('Dinner')}
+                        onClick={() => this.handleCategoryChange('Dinner')}
                         className={this.state.isActive === 'Dinner' ? 'active' : ''}
                     >
                         Dinner
                     </button>
                     <button
-                        onClick={() => this.handClick('Breakfast')}
+                        onClick={() => this.handleCategoryChange('Breakfast')}
                         className={this.state.isActive === 'Breakfast' ? 'active' : ''}
                     >
                         Breakfast
@@ -66,12 +67,12 @@ export default class OrderMainMenu extends Component {
                 </div>
 
                 <ul>
-                    {[burger1, burger2, burger3, burger4, burger5, burger6].map((img, index) => (
+                    {arrayBurger.map((img, index) => (
                         <li key={index}>
-                            <img src={img} alt={`Burger ${index + 1}`} />
+                            <img src={img} alt={`Burger ${index}`} />
                             <div className="contentBlog">
                                 <div className="nameAndCost">
-                                    <h3>Burger {index + 1}</h3>
+                                    <h3>Burger {index}</h3>
                                     <p>$ 9.20 USD</p>
                                 </div>
                                 <p className="ipsum">
