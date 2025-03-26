@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2a93d19-2386-4e8e-b874-590c2dee8b47" name="Changes" comment="new update HM3" />
+    <list default="true" id="d2a93d19-2386-4e8e-b874-590c2dee8b47" name="Changes" comment="README.md" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +53,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "C:/Users/artem/Desktop/SDC_React_TheBest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -98,7 +98,7 @@
       <workItem from="1742831460908" duration="1035000" />
       <workItem from="1742893579211" duration="2743000" />
       <workItem from="1742902487643" duration="3584000" />
-      <workItem from="1742978681254" duration="988000" />
+      <workItem from="1742978681254" duration="1315000" />
     </task>
     <task id="LOCAL-00001" summary="Setting">
       <option name="closed" value="true" />
@@ -156,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742978724189</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="README.md">
+      <option name="closed" value="true" />
+      <created>1742979807821</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742979807821</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +188,7 @@
     <MESSAGE value="Add directory Components Hm2" />
     <MESSAGE value="Add directory Hm1" />
     <MESSAGE value="new update HM3" />
-    <option name="LAST_COMMIT_MESSAGE" value="new update HM3" />
+    <MESSAGE value="README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="README.md" />
   </component>
 </project>
