@@ -14,12 +14,16 @@ export default class OrderMainMenu extends Component {
         isMessageVisible: false
     };
 
-    handleCategoryChange = (category) => {
-        this.setState({ isActive: category });
+
+
+    handleCategoryChange = (e) => {
+        this.setState({ isActive: e });
     };
 
     handleMouseEnter = () => {
-        this.setState({ isMessageVisible: true });
+        this.setState(state => ({
+            isMessageVisible: !state.isMessageVisible,
+        }));
     };
 
     handleMouseLeave = () => {

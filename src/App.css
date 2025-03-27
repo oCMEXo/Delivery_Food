@@ -14,7 +14,8 @@
 }
 
 :root {
-  --header-color: #28224B;
+
+  --header_Color_Button-color: #28224B;
   --background-color: #35B8BE;
   --bacgroundHeader-color: #FFF;
   --max-width-width: 1440px;
@@ -71,7 +72,7 @@ header {
   position: relative;
   text-decoration: none;
   border: none;
-  color: var(--header-color);
+  color: var(--header_Color_Button-color);
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
