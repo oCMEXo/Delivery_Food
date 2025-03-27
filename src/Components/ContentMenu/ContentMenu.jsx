@@ -11,7 +11,6 @@ export class ContentMenuMain extends Component {
             isClicked: false,
             selectedItemId: null,
             expandedTextId: null
-
         };
     }
 
@@ -44,6 +43,7 @@ export class ContentMenuMain extends Component {
             expandedTextId: prevState.expandedTextId === id ? null : id
         }));
     };
+
 
     truncateText = (text, maxLength = 80, id) => {
         const { expandedTextId } = this.state;
@@ -79,9 +79,7 @@ export class ContentMenuMain extends Component {
 
 
     render() {
-        const { error, isLoaded, items} = this.state;
-        const { selectedItemId } = this.state;
-
+        const { error, isLoaded, items, selectedItemId} = this.state;
 
         if (error) {
             return <p>Error: {error.message}</p>;
@@ -95,8 +93,8 @@ export class ContentMenuMain extends Component {
                             <li key={item.id}
                                 onClick={() => this.handleItemClick(item.id)}
                                 style={{
-                                    height: selectedItemId === item.id ? '100%' : '',
-                                    alignItems: selectedItemId === item.id ? 'start' : '',
+                                    // height: selectedItemId === item.id ? 'auto' : '160px',
+                                    // alignItems: selectedItemId === item.id ? 'start' : '',
                                 }}
                             >
                                 <img src={item.img} alt={item.meal} />
@@ -109,8 +107,10 @@ export class ContentMenuMain extends Component {
                                         {this.truncateText(item.instructions, 80, item.id)}
                                     </p>
                                     <div className="sizeAdd">
-                                        <p>1</p>
-                                        <button onClick={this.props.incrementCount} >Add to cart</button>
+                                        <p>{this.props.count}</p>
+                                        <button onClick={() => {
+                                            this.props.incrementCount()
+                                        }}>Add to cart</button>
                                     </div>
                                 </div>
                             </li>

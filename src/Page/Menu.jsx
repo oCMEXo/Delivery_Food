@@ -18,6 +18,7 @@ export default class Menu extends Component {
         }));
     };
 
+
     render() {
 
 
@@ -26,7 +27,9 @@ export default class Menu extends Component {
 
                 <Header count={this.state.count}/>
 
-                <OrderMainMenu  incrementCount={this.incrementCount} />
+                <OrderMainMenu
+                    count={this.state.count}
+                    incrementCount={this.incrementCount} />
 
                 <Footer/>
             </>

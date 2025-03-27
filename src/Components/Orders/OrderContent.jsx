@@ -8,7 +8,7 @@ export default class OrderMainMenu extends Component {
         super(props);
         this.state = {
             selectedButton: null,
-            isActive: null,
+            // isActive: null,
             isMessageVisible: false
         }
     }
@@ -58,7 +58,9 @@ export default class OrderMainMenu extends Component {
                         />))}
                 </div>
 
-                <ContentMenuMain incrementCount={this.props.incrementCount} />
+                <ContentMenuMain
+                    count = {this.props.count}
+                    incrementCount={this.props.incrementCount} />
 
             </main>
         );
