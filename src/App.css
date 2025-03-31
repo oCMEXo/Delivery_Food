@@ -63,7 +63,7 @@ header {
 
 .buttonNavigation a {
 
-  position: relative; /* Нужно для псевдоэлемента */
+  position: relative;
   text-decoration: none;
   border: none;
   color: var(--header-color);
@@ -73,14 +73,14 @@ header {
 }
 
 .buttonNavigation a::after {
-  content: ""; /* Создаём линию */
+  content: "";
   position: absolute;
   left: 0;
-  bottom: -2px; /* Чтобы линия шла по нижнему краю */
-  width: 0%; /* Начинаем с 0 ширины */
-  height: 2px; /* Толщина линии */
-  background-color: black; /* Цвет линии */
-  transition: width 0.5s ease-in-out; /* Плавное появление */
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  transition: width 0.5s ease-in-out;
 }
 
 .buttonNavigation a:hover::after {
@@ -226,46 +226,46 @@ header {
   border-radius: 6px;
 }
 
-form {
-  padding-top: 10px;
-  display: grid;
-  grid-template-columns: auto 1fr; /* Первый столбец для label, второй для input */
-  column-gap: 50px;
-  row-gap: 20px;
-  align-items: center; /* Выравниваем элементы по центру по вертикали */
-  max-width: 500px; /* Ограничиваем ширину формы */
-  margin: 0 auto; /* Центрируем форму на странице */
-  padding-bottom: 250px;
-}
+/*form {*/
+/*  padding-top: 10px;*/
+/*  display: grid;*/
+/*  grid-template-columns: auto 1fr; !* Первый столбец для label, второй для input *!*/
+/*  column-gap: 50px;*/
+/*  row-gap: 20px;*/
+/*  align-items: center; !* Выравниваем элементы по центру по вертикали *!*/
+/*  max-width: 500px; !* Ограничиваем ширину формы *!*/
+/*  margin: 0 auto; !* Центрируем форму на странице *!*/
+/*  padding-bottom: 250px;*/
+/*}*/
 
 label {
   text-align: right; /* Выравниваем текст по правому краю */
 }
 
-input {
-  width: 100%; /* Input занимает всю ширину столбца */
-  max-width: 430px; /* Ограничиваем ширину */
-  border: 1px solid gray !important;
-  border-radius: 4px;
-  height: 45px;
-  box-sizing: border-box; /* Учитываем padding и border в ширине */
-}
+/*input {*/
+/*  width: 100%; !* Input занимает всю ширину столбца *!*/
+/*  max-width: 430px; !* Ограничиваем ширину *!*/
+/*  border: 1px solid gray !important;*/
+/*  border-radius: 4px;*/
+/*  height: 45px;*/
+/*  box-sizing: border-box; !* Учитываем padding и border в ширине *!*/
+/*}*/
 
-form button {
-  grid-column: span 2; /* Кнопка занимает обе колонки */
-  justify-self: center; /* Центрируем кнопку внутри её ячейки */
-  background-color: #00c4b4; /* Цвет кнопки как на изображении */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
+/*form button {*/
+/*  grid-column: span 2; !* Кнопка занимает обе колонки *!*/
+/*  justify-self: center; !* Центрируем кнопку внутри её ячейки *!*/
+/*  background-color: #00c4b4; !* Цвет кнопки как на изображении *!*/
+/*  color: white;*/
+/*  border: none;*/
+/*  padding: 10px 20px;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*  font-size: 16px;*/
+/*}*/
 
-form button:hover {
-  background-color: #00a89a; /* Чуть темнее при наведении */
-}
+/*form button:hover {*/
+/*  background-color: #00a89a; !* Чуть темнее при наведении *!*/
+/*}*/
 
 footer {
   position: relative;
@@ -282,7 +282,6 @@ footer {
 
   background-image: url("assets/points.png");
   background-size: 100% 100%;
-  /*background-position: center 10%;*/
   background-repeat: no-repeat;
 
 
@@ -519,14 +518,13 @@ hr {
   width: 100%;
   max-width: var(--max-width-width);
   display: flex;
-  flex-wrap: wrap; /* Позволяет карточкам переноситься */
+  flex-wrap: wrap;
   justify-content: center;
-  /*display: grid;*/
-  /*grid-template-columns: repeat(2, 1fr);*/
-  /*place-items: center;*/
   gap: 20px;
   padding-top: 40px;
 }
+
+
 
 .mainManu ul li {
   display: flex;
@@ -575,16 +573,7 @@ hr {
 .sizeAdd {
   display: flex;
   gap: 10px;
-  p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 45px;
-    border-radius: 6px;
-    border: 1px solid #DDD;
-    background: #FAFAFA;
-  }
+  /*p*/
   button {
     width: 147px;
     height: 45px;
@@ -599,6 +588,24 @@ hr {
     cursor: pointer;
   }
 }
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
 
 .seeMore {
   margin-top: 50px;

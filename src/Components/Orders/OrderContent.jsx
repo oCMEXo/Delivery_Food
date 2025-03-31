@@ -2,16 +2,15 @@ import React, {Component} from 'react';
 import '../../App.css';
 import {ContentMenuMain} from "../ContentMenu/ContentMenu.jsx";
 import ButtonEats from "../ContentMenu/ButtonEat.jsx";
+import bd_Order_Name from "../ContentMenu/Navigation_Tabs.js";
 
 export default class OrderMainMenu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+
+        state = {
             selectedButton: null,
-            // isActive: null,
-            isMessageVisible: false
+            isMessageVisible: false,
         }
-    }
+
 
     handleMouseEnter = () => {
         this.setState({isMessageVisible: true});
@@ -26,12 +25,8 @@ export default class OrderMainMenu extends Component {
     };
 
 
+
     render() {
-        const bd_Order_Name = [
-            {id: 1, text: "Breakfast"},
-            {id: 2, text: "Lunch"},
-            {id: 3, text: "Dinner"}
-        ]
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
@@ -59,8 +54,10 @@ export default class OrderMainMenu extends Component {
                 </div>
 
                 <ContentMenuMain
-                    count = {this.props.count}
-                    incrementCount={this.props.incrementCount} />
+
+                    count={this.props.count}
+                    increment={this.props.increment}
+                />
 
             </main>
         );

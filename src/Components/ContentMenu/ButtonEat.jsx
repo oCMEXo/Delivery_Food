@@ -9,7 +9,7 @@ export default class ButtonEats extends Component {
                 onClick={onClick}
                 style={{
                     fontWeight: 400,
-                    lineHeight: "20px", /* 125% */
+                    lineHeight: "20px",
                     width: "132px",
                     height: "52px",
                     borderRadius: "6px",

@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import '../../App.css';
+import Input from "./Input.jsx";
 
 export class ContentMenuMain extends Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export class ContentMenuMain extends Component {
             items: [],
             isClicked: false,
             selectedItemId: null,
-            expandedTextId: null
+            expandedTextId: null,
+            countInput: 0,
         };
     }
 
@@ -34,19 +36,18 @@ export class ContentMenuMain extends Component {
             );
     }
 
-    handleItemClick = (id) => {
-        this.setState({ selectedItemId: id });
-    };
-
     handleTextToggle = (id) => {
         this.setState((prevState) => ({
-            expandedTextId: prevState.expandedTextId === id ? null : id
+            expandedTextId: prevState.expandedTextId === id ? true : id
         }));
     };
 
+    textMax = () => {
+        this.setState({truncateText: false});
+    }
 
-    truncateText = (text, maxLength = 80, id) => {
-        const { expandedTextId } = this.state;
+    truncateText = (text, maxLength = 90, id) => {
+        const {expandedTextId} = this.state;
         if (!text) return "";
 
         if (expandedTextId !== id) {
@@ -77,12 +78,11 @@ export class ContentMenuMain extends Component {
         return text;
     }
 
-
     render() {
-        const { error, isLoaded, items, selectedItemId} = this.state;
+        const {error, isLoaded, items} = this.state;
 
         if (error) {
-            return <p>Error: {error.message}</p>;
+            return <p>Error: {error.message}</p> && console.log(error);
         } else if (!isLoaded) {
             return <p>Loading...</p>;
         } else {
@@ -91,13 +91,9 @@ export class ContentMenuMain extends Component {
                     <ul>
                         {items.map(item => (
                             <li key={item.id}
-                                onClick={() => this.handleItemClick(item.id)}
-                                style={{
-                                    // height: selectedItemId === item.id ? 'auto' : '160px',
-                                    // alignItems: selectedItemId === item.id ? 'start' : '',
-                                }}
+                                onMouseEnter={this.textMax}
                             >
-                                <img src={item.img} alt={item.meal} />
+                                <img src={item.img} alt={item.meal}/>
                                 <div className="contentBlog">
                                     <div className="nameAndCost">
                                         <h3>{item.meal}</h3>
@@ -107,10 +103,10 @@ export class ContentMenuMain extends Component {
                                         {this.truncateText(item.instructions, 80, item.id)}
                                     </p>
                                     <div className="sizeAdd">
-                                        <p>{this.props.count}</p>
-                                        <button onClick={() => {
-                                            this.props.incrementCount()
-                                        }}>Add to cart</button>
+                                        <Input count={this.state.count}
+                                               onCountSubmit={this.handleCountSubmit}
+                                               increment={this.props.increment}
+                                        />
                                     </div>
                                 </div>
                             </li>
