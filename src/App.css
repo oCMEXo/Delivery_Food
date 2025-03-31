@@ -226,46 +226,46 @@ header {
   border-radius: 6px;
 }
 
-/*form {*/
-/*  padding-top: 10px;*/
-/*  display: grid;*/
-/*  grid-template-columns: auto 1fr; !* Первый столбец для label, второй для input *!*/
-/*  column-gap: 50px;*/
-/*  row-gap: 20px;*/
-/*  align-items: center; !* Выравниваем элементы по центру по вертикали *!*/
-/*  max-width: 500px; !* Ограничиваем ширину формы *!*/
-/*  margin: 0 auto; !* Центрируем форму на странице *!*/
-/*  padding-bottom: 250px;*/
-/*}*/
+.from_Order {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr; /* Первый столбец для label, второй для input */
+  column-gap: 50px;
+  row-gap: 20px;
+  align-items: center; /* Выравниваем элементы по центру по вертикали */
+  max-width: 500px; /* Ограничиваем ширину формы */
+  margin: 0 auto; /* Центрируем форму на странице */
+  padding-bottom: 250px;
+}
 
-label {
+.from_Order label {
   text-align: right; /* Выравниваем текст по правому краю */
 }
 
-/*input {*/
-/*  width: 100%; !* Input занимает всю ширину столбца *!*/
-/*  max-width: 430px; !* Ограничиваем ширину *!*/
-/*  border: 1px solid gray !important;*/
-/*  border-radius: 4px;*/
-/*  height: 45px;*/
-/*  box-sizing: border-box; !* Учитываем padding и border в ширине *!*/
-/*}*/
+.from_Order input {
+  width: 100%; /* Input занимает всю ширину столбца */
+  max-width: 430px; /* Ограничиваем ширину */
+  border: 1px solid gray !important;
+  border-radius: 4px;
+  height: 45px;
+  box-sizing: border-box; /* Учитываем padding и border в ширине */
+}
 
-/*form button {*/
-/*  grid-column: span 2; !* Кнопка занимает обе колонки *!*/
-/*  justify-self: center; !* Центрируем кнопку внутри её ячейки *!*/
-/*  background-color: #00c4b4; !* Цвет кнопки как на изображении *!*/
-/*  color: white;*/
-/*  border: none;*/
-/*  padding: 10px 20px;*/
-/*  border-radius: 5px;*/
-/*  cursor: pointer;*/
-/*  font-size: 16px;*/
-/*}*/
+.from_Order button {
+  grid-column: span 2; /* Кнопка занимает обе колонки */
+  justify-self: center; /* Центрируем кнопку внутри её ячейки */
+  background-color: #00c4b4; /* Цвет кнопки как на изображении */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-/*form button:hover {*/
-/*  background-color: #00a89a; !* Чуть темнее при наведении *!*/
-/*}*/
+form button:hover {
+  background-color: #00a89a; /* Чуть темнее при наведении */
+}
 
 footer {
   position: relative;
