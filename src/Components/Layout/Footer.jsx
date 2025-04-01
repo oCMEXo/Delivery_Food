@@ -8,7 +8,7 @@ export default class Footer extends Component {
     render() {
         return (
             <footer >
-                <div className="firstLavel">
+                <div className="firstLevel">
                     <div className="takeaway">
                         <img src={logo} alt="logo"/>
                         <p>Takeaway & Delivery template for small - medium businesses.</p>

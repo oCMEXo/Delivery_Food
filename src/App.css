@@ -272,7 +272,6 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  /*max-width: var(--max-width-width);*/
   min-width: var(--min-width-width);
   height: auto;
   background-color: #F5FBFC;
@@ -287,7 +286,7 @@ footer {
 
 }
 
-.firstLavel {
+.firstLevel {
   display: flex;
   flex-direction: row;
   justify-content: space-around;

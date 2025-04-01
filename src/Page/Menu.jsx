@@ -43,7 +43,8 @@ export default class Menu extends Component {
 
                 <OrderMainMenu
                     count={this.state.count}
-                    increment={this.increment} />
+                    increment={this.increment}
+                />
 
                 <Footer/>
             </>

@@ -5,9 +5,9 @@ export default class Input extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: this.props.count || 0, // Инициализируем значение с props
+            // count: this.props.count || 0,
             input: '0',
-            submit: ''
+            AddToSubmit: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -17,10 +17,10 @@ export default class Input extends Component {
     handleChange = (e) => {
         this.setState({
             input: e.target.value,
-        })// Обновляем локальное состояние при вводе
+        })
     };
 
-    // Обработчик отправки значения при нажатии на кнопку
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState({
@@ -39,8 +39,8 @@ export default class Input extends Component {
                     <input
                         type="number"
                         placeholder='0'
-                        value={this.state.input}
-                        onChange={this.handleChange}  // Обновляем локальное состояние при изменении
+                        // value={this.state.input}
+                        onChange={this.handleChange}
                         min="0"
                         max="99"
                         style={{
