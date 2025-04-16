@@ -20,7 +20,7 @@ export default class Header extends Component {
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
-                                <i>{this.props.count || 0}</i>
+                                <i>{this.props.orders.length}</i>
                             </button>
                         </div>
                     </div>

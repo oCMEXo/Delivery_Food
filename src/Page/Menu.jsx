@@ -7,47 +7,101 @@ export default class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0,
+            input: 0,
+            AddToSubmit: 0,
+            order: [],
+            error: null,
+            isLoaded: false,
+            items: [],
         }
 
 
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.reset = this.reset.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.addToOrder = this.addToOrder.bind(this);
     }
 
-    increment() {
+
+    handleChange = (e) => {
         this.setState({
-            count: this.state.count + 1,
+            input: e.target.value,
         })
-    }
+    };
 
-    decrement() {
-        this.setState({
-            count: this.state.count - 1,
-        })
-    }
 
-    reset() {
-        this.setState({
-            count: 0,
-        })
-    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        if (this.state.input <= 99) {
+            this.setState({
+                AddToSubmit: this.state.input,
+            });
+        } else {
+            // Пример простой обработки ошибки
+            alert("Значение должно быть меньше или равно 99");
+        }
+    };
 
+
+    componentDidMount() {
+        const URL_MEALS = 'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals';
+        fetch(URL_MEALS)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        items: result,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error,
+                    });
+                }
+            );
+    }
 
     render() {
-        return (
-            <>
+        const {error, isLoaded} = this.state;
 
-                <Header count={this.state.count} />
+        if (error) {
+            return <p>Error: {error.message}</p>;
+        } else if (!isLoaded) {
+            return <p>Loading...</p>;
+        } else {
+            return (
+                <>
 
-                <OrderMainMenu
-                    count={this.state.count}
-                    increment={this.increment}
-                />
+                    <Header orders={this.state.order}/>
 
-                <Footer/>
-            </>
-        )
+                    <OrderMainMenu
+                        error={this.state.error}
+                        isLoaded={this.state.isLoaded}
+                        items={this.state.items}
+                        addToOrder={this.addToOrder}
+                    />
+
+                    <Footer/>
+                </>
+            )
+
+        }
+    }
+    addToOrder(item) {
+        let isInArray = false
+        this.state.order.forEach(el => {
+            if(el.id === item.id)
+                isInArray = true
+        })
+        if(!isInArray){
+            this.setState(prevState => ({
+                order: [...prevState.order, item], // Добавляем item в массив
+            }), () => {
+                console.log(this.state.order);
+            });
+        }else{
+            alert(`${item.meal}: есть в корзине!`);
+        }
     }
 }

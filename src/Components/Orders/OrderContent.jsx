@@ -16,7 +16,8 @@ export default class OrderMainMenu extends Component {
         this.setState({isMessageVisible: true});
     };
 
-    handleMouseLeave = () => {
+    handleMouseLeave = (e) => {
+        e.preventDefault();
         this.setState({isMessageVisible: false});
     };
 
@@ -27,6 +28,7 @@ export default class OrderMainMenu extends Component {
 
 
     render() {
+        // {console.log(this.props.input)}
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
@@ -54,9 +56,12 @@ export default class OrderMainMenu extends Component {
                 </div>
 
                 <ContentMenuMain
+                    error={this.props.error}
+                    isLoaded={this.props.isLoaded}
+                    items={this.props.items}
+                    addToOrder={this.props.addToOrder}
 
-                    count={this.props.count}
-                    increment={this.props.increment}
+
                 />
 
             </main>

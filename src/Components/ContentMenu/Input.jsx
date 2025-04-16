@@ -2,45 +2,32 @@ import "../../App.css";
 import React, {Component} from "react";
 
 export default class Input extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // count: this.props.count || 0,
-            input: '0',
-            AddToSubmit: ''
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            input: e.target.value,
-        })
-    };
 
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.setState({
-            submit: this.state.input,
-        })
-    };
+    // handleChangeInput = (e) => {
+    //     this.props.handleChange(e.target.value);
+    // };
+
+
+    // handleSubmitInput = (e) => {
+    //     e.preventDefault()
+    //     this.props.handleSubmit(e);
+    // };
+
 
     render() {
         return (
             <>
+
                 <form style={{
                     display: "flex",
                     gap: '10px'
                 }}
-                      onSubmit={this.handleSubmit}>
+                      onSubmit={this.props.handleSubmit}>
                     <input
                         type="number"
                         placeholder='0'
-                        // value={this.state.input}
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                         min="0"
                         max="99"
                         style={{
@@ -56,11 +43,10 @@ export default class Input extends Component {
                         }}
 
                     />
-                    <button type={"submit"} onClick={this.props.increment}>Add to cart</button>
                 </form>
-                <h3>{this.state.submit}</h3>
-            </>
 
+                <button onClick={() => this.props.addToOrder(this.props.item)}>Add to cart</button>
+            </>
         );
     }
 }
