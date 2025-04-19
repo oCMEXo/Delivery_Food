@@ -13,33 +13,47 @@ export default class Menu extends Component {
             error: null,
             isLoaded: false,
             items: [],
+            quantityMap: {},
         }
 
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
     }
 
 
+    // handleChange = (e) => {
+    //     this.setState({
+    //         input: e.target.value,
+    //     })
+    // };
+
     handleChange = (e) => {
-        this.setState({
-            input: e.target.value,
-        })
+        this.setState({ input: parseInt(e.target.value) });
     };
 
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if (this.state.input <= 99) {
-            this.setState({
-                AddToSubmit: this.state.input,
-            });
-        } else {
-            // Пример простой обработки ошибки
-            alert("Значение должно быть меньше или равно 99");
-        }
+    handleQuantityChange = (id, value) => {
+        this.setState((prevState) => ({
+            quantityMap: {
+                ...prevState.quantityMap,
+                [id]: value
+            }
+        }));
     };
+
+    // handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (this.state.input <= 99) {
+    //         this.setState({
+    //             AddToSubmit: this.state.input,
+    //         });
+    //     } else {
+    //         // Пример простой обработки ошибки
+    //         alert("Значение должно быть меньше или равно 99");
+    //     }
+    // };
 
 
     componentDidMount() {
@@ -80,6 +94,10 @@ export default class Menu extends Component {
                         isLoaded={this.state.isLoaded}
                         items={this.state.items}
                         addToOrder={this.addToOrder}
+                        input={this.state.input}
+                        handleChange={this.handleChange}
+                        quantityMap={this.state.quantityMap}
+                        handleQuantityChange={this.handleQuantityChange}
                     />
 
                     <Footer/>
@@ -88,20 +106,30 @@ export default class Menu extends Component {
 
         }
     }
-    addToOrder(item) {
-        let isInArray = false
-        this.state.order.forEach(el => {
-            if(el.id === item.id)
-                isInArray = true
-        })
-        if(!isInArray){
-            this.setState(prevState => ({
-                order: [...prevState.order, item], // Добавляем item в массив
-            }), () => {
-                console.log(this.state.order);
-            });
-        }else{
-            alert(`${item.meal}: есть в корзине!`);
-        }
-    }
+    // addToOrder(item) {
+    //     let isInArray = false
+    //     this.state.order.forEach(el => {
+    //         if(el.id === item.id)
+    //             isInArray = true
+    //     })
+    //     if(!isInArray){
+    //         this.setState(prevState => ({
+    //             order: [...prevState.order, item],
+    //         }), () => {
+    //             console.log(this.state.order);
+    //             console.log(this.state.input);
+    //         });
+    //     }else{
+    //         alert(`${item.meal}: есть в корзине!`);
+    //     }
+    // }
+    addToOrder = (item) => {
+        const quantity = this.state.quantityMap[item.id] || 1;
+        const itemWithQty = { ...item, quantity };
+
+        this.setState((prevState) => ({
+            order: [...prevState.order, itemWithQty]
+        }));
+    };
+
 }

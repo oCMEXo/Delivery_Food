@@ -77,6 +77,9 @@
                                             <Input
                                                 addToOrder={this.props.addToOrder}
                                                 item={item}
+                                                input={this.state.quantityMap[item.id] || ""}
+                                                handleChange={(e) => this.props.handleQuantityChange(item.id, e.target.value)}
+                                                quantityMap={this.props.quantityMap}
 
                                             />
                                         </div>

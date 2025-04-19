@@ -10,6 +10,9 @@
 #root {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 :root {
@@ -17,7 +20,7 @@
   --background-color: #35B8BE;
   --bacgroundHeader-color: #FFF;
   --max-width-width: 1440px;
-  --min-width-width: 800px;
+  --min-width-width: 1000px;
   --main-color: #35B8BE;
   --color-color: #08090A;
   --border-color: #DDD;
@@ -32,12 +35,13 @@ body {
 }
 
 header {
+  display: flex;
   position: fixed;
+  align-items: center;
   background-color: white;
   width: 100%;
-  margin: 0 auto  ;
-  max-width: var(--max-width-width);
-  min-width: var(--min-width-width);
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .logo {
@@ -48,7 +52,8 @@ header {
 
 .contentHeader-Menu {
   padding: 10px 15px;
-  width: 100%;
+  max-width: var(--max-width-width);
+  min-width: var(--min-width-width);
   display: flex;
   align-items: center;
   justify-content: space-between;

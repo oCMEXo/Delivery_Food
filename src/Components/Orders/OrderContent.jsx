@@ -60,6 +60,10 @@ export default class OrderMainMenu extends Component {
                     isLoaded={this.props.isLoaded}
                     items={this.props.items}
                     addToOrder={this.props.addToOrder}
+                    input={this.props.input}
+                    handleChange={this.props.handleChange}
+                    quantityMap={this.props.quantityMap}
+                    handleQuantityChange={this.props.handleQuantityChange}
 
 
                 />
