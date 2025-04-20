@@ -18,19 +18,17 @@ export default class Menu extends Component {
 
 
         this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        this.getTotalQuantity = this.getTotalQuantity.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
     }
 
 
-    // handleChange = (e) => {
-    //     this.setState({
-    //         input: e.target.value,
-    //     })
-    // };
-
     handleChange = (e) => {
         this.setState({ input: parseInt(e.target.value) });
+    };
+
+    getTotalQuantity = () => {
+        return this.state.order.reduce((sum, item) => sum + item.quantity, 0);
     };
 
 
@@ -42,18 +40,6 @@ export default class Menu extends Component {
             }
         }));
     };
-
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (this.state.input <= 99) {
-    //         this.setState({
-    //             AddToSubmit: this.state.input,
-    //         });
-    //     } else {
-    //         // Пример простой обработки ошибки
-    //         alert("Значение должно быть меньше или равно 99");
-    //     }
-    // };
 
 
     componentDidMount() {
@@ -87,7 +73,10 @@ export default class Menu extends Component {
             return (
                 <>
 
-                    <Header orders={this.state.order}/>
+                    <Header
+                        getTotalQuantity={this.getTotalQuantity()}
+                        order={this.state.order}
+                    />
 
                     <OrderMainMenu
                         error={this.state.error}
@@ -106,30 +95,24 @@ export default class Menu extends Component {
 
         }
     }
-    // addToOrder(item) {
-    //     let isInArray = false
-    //     this.state.order.forEach(el => {
-    //         if(el.id === item.id)
-    //             isInArray = true
-    //     })
-    //     if(!isInArray){
-    //         this.setState(prevState => ({
-    //             order: [...prevState.order, item],
-    //         }), () => {
-    //             console.log(this.state.order);
-    //             console.log(this.state.input);
-    //         });
-    //     }else{
-    //         alert(`${item.meal}: есть в корзине!`);
-    //     }
-    // }
-    addToOrder = (item) => {
-        const quantity = this.state.quantityMap[item.id] || 1;
-        const itemWithQty = { ...item, quantity };
 
-        this.setState((prevState) => ({
-            order: [...prevState.order, itemWithQty]
-        }));
+    addToOrder = (newItem) => {
+        this.setState((prevState) => {
+            const updatedOrder = [...prevState.order];
+            const existingIndex = updatedOrder.findIndex(item => item.id === newItem.id);
+
+            if (existingIndex !== -1) {
+                updatedOrder[existingIndex].quantity += newItem.quantity;
+            } else {
+                updatedOrder.push(newItem);
+            }
+            return {
+                order: updatedOrder,
+            };
+        }, () => {
+            console.log("Order:", this.state.order);
+        });
     };
+
 
 }

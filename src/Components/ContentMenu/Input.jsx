@@ -9,9 +9,9 @@ export default class Input extends Component {
                 <input
                     type="number"
                     placeholder='0'
-                    value={this.props.input || ''}
+                    value={this.props.input}
                     onChange={this.props.handleChange}
-                    min="0"
+
                     max="99"
                     style={{
                         color: 'black',
@@ -27,11 +27,16 @@ export default class Input extends Component {
 
                 />
 
-                {/*<button onClick={() => this.props.addToOrder(this.props.item)}>Add to cart</button>*/}
-                <button onClick={() => this.props.addToOrder({
-                    ...this.props.item,
-                    quantity: this.props.input
-                })}>
+                <button  onClick={() => {
+                    const quantity = parseInt(this.props.input) || 0;
+                    if (quantity > 0) {
+                        this.props.addToOrder({
+                            ...this.props.item,
+                            quantity,
+                        });
+                    }
+                }}
+                >
                     Add to cart
                 </button>
             </>

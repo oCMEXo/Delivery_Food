@@ -52,6 +52,7 @@ header {
 
 .contentHeader-Menu {
   padding: 10px 15px;
+  width: 100%;
   max-width: var(--max-width-width);
   min-width: var(--min-width-width);
   display: flex;

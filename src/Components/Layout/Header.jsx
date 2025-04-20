@@ -20,7 +20,7 @@ export default class Header extends Component {
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
-                                <i>{this.props.orders.length}</i>
+                                <i>{this.props.getTotalQuantity}</i>
                             </button>
                         </div>
                     </div>

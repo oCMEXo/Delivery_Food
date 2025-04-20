@@ -28,7 +28,6 @@ export default class OrderMainMenu extends Component {
 
 
     render() {
-        // {console.log(this.props.input)}
         return (
             <main className="mainManu">
                 <div className="infoPageMenu">
