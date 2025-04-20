@@ -2,7 +2,9 @@
   "name": "sdc",
   "private": true,
   "version": "1.0.0",
-  "description": "Page: Menu",
+
+  "description": "Проект для домашних заданий",
+
   "author": "Artsiom <artsiom.harminovich@student.ehu.lt>",
   "license": "MIT",
   "repository": {
