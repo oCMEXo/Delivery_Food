@@ -19,7 +19,7 @@ export default function Header({getTotalQuantity}){
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
-                                <i>{getTotalQuantity}</i>
+                                <i>{getTotalQuantity || '0'}</i>
                             </button>
                         </div>
                     </div>

@@ -36,7 +36,7 @@ body {
 
 header {
   display: flex;
-  position: fixed;
+  /*position: fixed;*/
   align-items: center;
   background-color: white;
   width: 100%;
@@ -59,6 +59,12 @@ header {
   align-items: center;
   justify-content: space-between;
 
+}
+
+button{
+  border: none;
+  background-color: unset;
+  cursor: pointer;
 }
 
 .buttonNavigation {
@@ -408,19 +414,8 @@ hr {
 
 
 
-
-
-
-
-
-
-
-
-
 .mainManu {
   width: 100%;
-  /*max-width: var(--max-width-width);*/
-  /*min-width: var(--min-width-width);*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -649,3 +644,69 @@ input[type="number"]::-webkit-outer-spin-button {
   color: black;
 }
 
+.Home_Section {
+  width: 100%;
+  height: 820px;
+  background-image: url("assets/BG Shape.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info_Section_Home {
+  width: 100%;
+  max-width: var(--max-width-width);
+  display: flex;
+  place-content: center;
+}
+
+.beautifulFood {
+  width: 600px}
+
+.beautifulFood h1 {
+  color: #08090A;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px; /* 100% */
+  letter-spacing: 1.8px;
+}
+
+.beautifulFood span {
+  color: #35B8BE;
+}
+
+.beautifulFood .Lorem_Ipsum {
+  padding-top: 27px;
+  color: #546285;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24.12px;
+  letter-spacing: 0.36px;
+}
+
+.beautifulFood button {
+  margin-top: 53px;
+  border-radius: 6px;
+  width: 193px;
+  height: 60px;
+  color: white;
+  background-color: #35B8BE;
+}
+
+.Trust_Pilot {
+  padding-top: 30px;
+  p {
+    padding-top: 10px;
+  }
+}
+
+.img_Home {
+  width: 600px;
+  height: 580px;
+  flex-shrink: 0;
+}
