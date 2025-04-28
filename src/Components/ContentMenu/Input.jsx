@@ -1,45 +1,38 @@
-import "../../App.css";
-import React, {Component} from "react";
+import React from "react";
 
-export default class Input extends Component {
+export default function Input({input, handleChange, addToOrder, item}) {
+    const handleAddToOrder = () => {
+        const quantity = parseInt(input) || 0;
+        if (quantity > 0) {
+            addToOrder({
+                ...item,
+                quantity,
+            });
+        }
+    };
 
-    render() {
-        return (
-            <>
-                <input
-                    type="number"
-                    placeholder='0'
-                    value={this.props.input}
-                    onChange={this.props.handleChange}
-
-                    max="99"
-                    style={{
-                        color: 'black',
-                        padding: "10px",
-                        display: 'flex',
-                        alignContent: 'center',
-                        justifyContent: 'center',
-                        width: "30px",
-                        borderRadius: '6px',
-                        border: '1px solid #DDD',
-                        background: '#FAFAFA',
-                    }}
-
-                />
-
-                <button  onClick={() => {
-                    const quantity = parseInt(this.props.input) || 0;
-                    if (quantity > 0) {
-                        this.props.addToOrder({
-                            ...this.props.item,
-                            quantity,
-                        });
-                    }
+    return (
+        <>
+            <input
+                type="number"
+                placeholder="0"
+                value={input}
+                onChange={handleChange}
+                max="99"
+                style={{
+                    color: "black",
+                    padding: "10px",
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    width: "30px",
+                    borderRadius: "6px",
+                    border: "1px solid #DDD",
+                    background: "#FAFAFA",
                 }}
-                >
-                    Add to cart
-                </button>
-            </>
-        );
-    }
-}
+            />
+            <button onClick={handleAddToOrder}>Add to cart</button>
+        </>
+    );
+};
+

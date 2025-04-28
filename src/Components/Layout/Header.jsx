@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import '../../App.css';
 
 
 import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
 
-export default class Header extends Component {
-    render() {
+export default function Header({getTotalQuantity}){
         return (
                 <header>
                     <div className="contentHeader-Menu">
@@ -20,11 +19,11 @@ export default class Header extends Component {
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
-                                <i>{this.props.getTotalQuantity}</i>
+                                <i>{getTotalQuantity}</i>
                             </button>
                         </div>
                     </div>
                 </header>
         );
-    }
+
 }
