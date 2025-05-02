@@ -41,6 +41,7 @@ export default function Menu(){
 
 
 
+
     const handleChange = (e) => {
         setInput(parseInt(e.target.value));
     };
@@ -94,7 +95,6 @@ export default function Menu(){
                     handleQuantityChange={handleQuantityChange}
                     chooseCategory={chooseCategory}
                 />
-
                 <Footer />
             </>
         );

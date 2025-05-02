@@ -522,6 +522,7 @@ hr {
   justify-content: center;
   gap: 20px;
   padding-top: 40px;
+
 }
 
 
@@ -630,6 +631,8 @@ input[type="number"]::-webkit-outer-spin-button {
   color: white;
   transform: scale(1.1);
 }
+
+
 
 .Categories_button_Navigation button {
   font-weight: 400;
