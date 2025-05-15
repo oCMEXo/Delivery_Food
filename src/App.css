@@ -74,7 +74,6 @@ button {
 }
 
 .buttonNavigation a {
-
     position: relative;
     text-decoration: none;
     border: none;
@@ -84,20 +83,12 @@ button {
     line-height: 20px;
 }
 
-.buttonNavigation a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0%;
-    height: 2px;
-    background-color: black;
-    transition: width 0.5s ease-in-out;
+.buttonNavigation a:hover {
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
 }
 
-.buttonNavigation a:hover::after {
-    width: 100%; /* Линия полностью появляется */
-}
+
 
 .yourShopping {
     width: 55px;
@@ -767,7 +758,7 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: end;
 
     div {
         display: flex;
@@ -777,7 +768,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
     .password {
         label {
-            padding-right: 10px;
+            /*text-align: center;*/
+            align-self: center;
         }
     }
 }

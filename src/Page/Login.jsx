@@ -11,7 +11,7 @@ export default function Login(){
                 <form action="">
                     <div className="input_Info">
                         <div className="email">
-                            <label htmlFor="email">User Name</label>
+                            <label htmlFor="email">Email</label>
                             <input type="email" />
                         </div>
                         <div className="password">
