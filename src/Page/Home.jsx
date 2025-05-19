@@ -10,24 +10,18 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
     const {isAuth, email} = useAuth();
     const dispatch = useDispatch();
-
+    const push  = useNavigate();
     return isAuth ? (
         <>
             <Header/>
             <button
                 onClick={() => dispatch(removeUser())}
-            >Logout
+            >Logout{email}
             </button>
             <HomeComponent/>
             <Footer/>
         </>
     ) : (
-        <div>
-            <p>Welvome</p>
-            <button
-                onClick={() => dispatch(removeUser())}
-            >Logout
-            </button>
-        </div>
+        push("/login")
     )
 }

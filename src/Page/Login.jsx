@@ -5,53 +5,68 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setUser} from "../Components/redux/slices/usersSlice.js";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {useState} from "react";
 
 export default function Login() {
     const dispatch = useDispatch();
     const push = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState('');
+
+    const validateEmail = (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value);
+    };
 
 
-    const handleSubmit = (email, password) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!validateEmail(email)) {
+            setError('Пожалуйста, введите корректный email (пример: user@example.com)');
+        } else {
+            setError('');
+            console.log('Отправка email:', email);
+        }
+
+
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
-            .then(({user}) => {
+            .then(({ user }) => {
                 console.log(user);
                 dispatch(setUser({
                     email: user.email,
                     id: user.uid,
                     token: user.refreshToken,
-                }))
+                }));
                 push("/");
-        })
+            })
             .catch(error => console.error(error));
-    }
+    };
 
     return (
         <>
             <Header/>
             <section className="login-font">
                 <h1>Login</h1>
-                {/*<form action="">*/}
-                    {/*<form action="">*/}
-                    {/*    <div className="input_Info">*/}
-                    {/*        <div className="email">*/}
-                    {/*            <label htmlFor="email">Email</label>*/}
-                    {/*            <input type="email" />*/}
-                    {/*        </div>*/}
-                    {/*        <div className="password">*/}
-                    {/*            <label htmlFor="password">Password</label>*/}
-                    {/*            <input type="password" />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="btn_Form">*/}
-                    {/*        <button type="submit" className='submit'>Submit</button>*/}
-                    {/*        <button className='cancel'>Cansel</button>*/}
-                    {/*    </div>*/}
-                    {/*</form>*/}
+                    <form onSubmit={handleSubmit}>
                     <Form
-                        handleSubmit={handleSubmit}
+                        email={email}
+                        setEmail={setEmail}
+                        password={password}
+                        setPassword={setPassword}
+                        error={error}
                     />
-                {/*</form>*/}
+                        <div className="btn_Form">
+                            <button type="submit" className='submit'>Submit</button>
+                            <button
+                                type="button"
+                                className='cancel'
+                                onClick={() => push('/CreateUser')}
+                            >Create User</button>
+                        </div>
+                    </form>
             </section>
             <Footer/>
         </>

@@ -1,38 +1,41 @@
-import {useState} from "react";
 
 
-export default function From({handleSubmit}) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function From({error, email, password, setEmail, setPassword}) {
+
     return (
-        <>
-            <div className="input_Info">
-                <div className="email">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+
+
+            <>
+                <div className="input_Info">
+                    <div className="email">
+                        <div className="email_Item wrapper_form">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="text"
+                                id="email"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                className={error ? 'input-error' : ''}
+                                required/>
+                        </div>
+                        {error && <div className="error-message">{error}</div>}
+                    </div>
+                    <div className="password">
+                        <div className="password_Item wrapper_form">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        {/*{error && <div className="error-message">{error}</div>}*/}
+                    </div>
                 </div>
-                <div className="password">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-            </div>
-            <div className="btn_Form">
-                <button
-                    type="submit"
-                    className='submit'
-                    onClick={ () => handleSubmit(email, password)}
-                >Submit
-                </button>
-                <button className='cancel'>Cansel</button>
-            </div>
-        </>
+
+            </>
+
     )
 }

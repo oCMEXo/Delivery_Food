@@ -222,9 +222,9 @@ button {
 }
 
 .size {
-    display: flex; /* Включаем Flexbox */
-    align-items: center; /* Центрируем по вертикали */
-    justify-content: center; /* Центрируем по горизонтали */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60px;
     height: 45px;
     border: 1px solid var(--border-color);
@@ -234,32 +234,32 @@ button {
 .from_Order {
     padding-top: 10px;
     display: grid;
-    grid-template-columns: auto 1fr; /* Первый столбец для label, второй для input */
+    grid-template-columns: auto 1fr;
     column-gap: 50px;
     row-gap: 20px;
-    align-items: center; /* Выравниваем элементы по центру по вертикали */
-    max-width: 500px; /* Ограничиваем ширину формы */
-    margin: 0 auto; /* Центрируем форму на странице */
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
     padding-bottom: 250px;
 }
 
 .from_Order label {
-    text-align: right; /* Выравниваем текст по правому краю */
+    text-align: right;
 }
 
 .from_Order input {
-    width: 100%; /* Input занимает всю ширину столбца */
-    max-width: 430px; /* Ограничиваем ширину */
+    width: 100%;
+    max-width: 430px;
     border: 1px solid gray !important;
     border-radius: 4px;
     height: 45px;
-    box-sizing: border-box; /* Учитываем padding и border в ширине */
+    box-sizing: border-box;
 }
 
 .from_Order button {
-    grid-column: span 2; /* Кнопка занимает обе колонки */
-    justify-self: center; /* Центрируем кнопку внутри её ячейки */
-    background-color: #00c4b4; /* Цвет кнопки как на изображении */
+    grid-column: span 2;
+    justify-self: center;
+    background-color: #00c4b4;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -269,7 +269,7 @@ button {
 }
 
 form button:hover {
-    background-color: #00a89a; /* Чуть темнее при наведении */
+    background-color: #00a89a;
 }
 
 footer {
@@ -763,13 +763,31 @@ input[type="number"]::-webkit-outer-spin-button {
     div {
         display: flex;
         align-items: center;
+    }
+
+    .wrapper_form {
+        display: flex;
         gap: 30px;
     }
 
+
+
     .password {
+        display: flex;
+        flex-direction: column;
         label {
-            /*text-align: center;*/
             align-self: center;
         }
     }
+}
+
+.email, .password {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
 }
