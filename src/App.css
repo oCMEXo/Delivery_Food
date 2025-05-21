@@ -73,7 +73,7 @@ button {
     gap: 20px;
 }
 
-.buttonNavigation a {
+.buttonNavigation button {
     position: relative;
     text-decoration: none;
     border: none;
@@ -83,7 +83,7 @@ button {
     line-height: 20px;
 }
 
-.buttonNavigation a:hover {
+.buttonNavigation button:hover {
     color: var(--main-color);
     transition: color 0.2s ease-in-out;
 }

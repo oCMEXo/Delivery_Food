@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import Header from "../Components/Layout/Header.jsx";
 import OrderMainMenu from "../Components/Orders/OrderContent.jsx";
 import Footer from "../Components/Layout/Footer.jsx";
+import {useAuth} from "../Components/hooks/use-auth.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Menu(){
-
+    const { isAuth } = useAuth();
+    const navigate = useNavigate();
     const [input, setInput] = useState(0);
     const [order, setOrder] = useState([]);
     const [error, setError] = useState(null);
@@ -12,6 +15,8 @@ export default function Menu(){
     const [items, setItems] = useState([]);
     const [quantityMap, setQuantityMap] = useState({});
     const [currentItems, setCurrentItems] = useState([]);
+
+
 
 
     useEffect(() => {
@@ -38,6 +43,16 @@ export default function Menu(){
         setCurrentItems(items.filter((el) => el.category === category));
 
     };
+
+    useEffect(() => {
+        if (!isAuth) {
+            navigate("/login");
+        }
+    }, [isAuth, navigate]);
+
+    if (!isAuth) {
+        return null;
+    }
 
 
 
