@@ -7,12 +7,12 @@ import Basket from "../../assets/resp.svg";
 import {removeUser} from "../redux/slices/usersSlice.js";
 import {useDispatch} from "react-redux";
 import Menu from "../../Page/Menu.jsx";
+import {useAuth} from "../hooks/use-auth.js";
 
 export default function Header({getTotalQuantity}){
     const dispatch = useDispatch();
     const push = useNavigate();
-    const [quantityMap, setQuantityMap] = useState({});
-
+    const {isAuth} = useAuth();
     return (
                 <header>
                     <div className="contentHeader-Menu">
@@ -25,9 +25,9 @@ export default function Header({getTotalQuantity}){
                                 <button onClick={() => push("/menu")}>Menu</button>
                                 <button onClick={() => push("/")}>Company</button>
                                 <button onClick={() => push("/")}>UserName</button>
-                                <button onClick={() => dispatch(removeUser())}>
+                                {isAuth ? <button onClick={() => dispatch(removeUser())}>
                                     Logout
-                                </button>
+                                </button> : ''}
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
