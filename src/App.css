@@ -36,7 +36,7 @@ body {
 
 header {
     display: flex;
-    /*position: fixed;*/
+    position: fixed;
     align-items: center;
     background-color: white;
     width: 100%;
