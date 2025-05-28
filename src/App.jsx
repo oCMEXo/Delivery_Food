@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from "./Page/Menu.jsx";
+import Menu from "./Page/Menu.tsx";
 import Home from "./Page/Home.jsx";
 import Login from "./Page/Login.jsx";
 import CreateUser from "./Page/CreateUser.jsx";

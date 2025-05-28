@@ -1,10 +1,16 @@
+import React from "react";
 
+interface FormProp {
+    error: string;
+    email: string;
+    password: number;
+    setEmail: (value: string) => string;
+    setPassword: (value: string) => string;
+}
 
-export default function From({error, email, password, setEmail, setPassword}) {
+const Form: React.FC<FormProp> = ({error, email, password, setEmail, setPassword})  => {
 
     return (
-
-
             <>
                 <div className="input_Info">
                     <div className="email">
@@ -39,3 +45,5 @@ export default function From({error, email, password, setEmail, setPassword}) {
 
     )
 }
+
+export default Form;

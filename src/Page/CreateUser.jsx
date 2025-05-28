@@ -1,6 +1,6 @@
-import Header from "../Components/Layout/Header.jsx";
-import Footer from "../Components/Layout/Footer.jsx";
-import Form from "../Components/Layout/From.jsx";
+import Header from "../Components/Layout/Header.js";
+import Footer from "../Components/Layout/Footer.tsx";
+import Form from "../Components/Layout/From.tsx";
 import {useDispatch} from "react-redux";
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import {setUser} from "../Components/redux/slices/usersSlice.js";

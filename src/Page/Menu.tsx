@@ -1,20 +1,39 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Components/Layout/Header.jsx";
+import Header from "../Components/Layout/Header.js";
 import OrderMainMenu from "../Components/Orders/OrderContent.jsx";
-import Footer from "../Components/Layout/Footer.jsx";
+import Footer from "../Components/Layout/Footer.tsx";
 import {useAuth} from "../Components/hooks/use-auth.js";
 import {useNavigate} from "react-router-dom";
 
-export default function Menu(){
+
+
+interface Meal {
+    id: string;
+    category: string;
+}
+
+interface PropsHeader {
+    getTotalQuantity: number;
+
+}
+
+interface OrderItem extends Meal {
+    quantity: number;
+    order: OrderItem[];
+}
+
+const Menu: React.FC = () => {
+
     const { isAuth } = useAuth();
     const navigate = useNavigate();
-    const [input, setInput] = useState(0);
-    const [order, setOrder] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
-    const [quantityMap, setQuantityMap] = useState({});
-    const [currentItems, setCurrentItems] = useState([]);
+
+    const [input, setInput] = useState<number>(0);
+    const [order, setOrder] = useState<OrderItem[]>([]);
+    const [error, setError] = useState<Error | null>(null);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [items, setItems] = useState<Meal[]>([]);
+    const [quantityMap, setQuantityMap] = useState<{[key: string]: number}>({});
+    const [currentItems, setCurrentItems] = useState<Meal[]>([]);
 
 
 
@@ -39,7 +58,7 @@ export default function Menu(){
         setCurrentItems(items);
     }, [items]);
 
-    const chooseCategory = (category) => {
+    const chooseCategory = (category: string) => {
         setCurrentItems(items.filter((el) => el.category === category));
 
     };
@@ -57,22 +76,23 @@ export default function Menu(){
 
 
 
-    const handleChange = (e) => {
-        setInput(parseInt(e.target.value));
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        setInput(isNaN(value) ? 0 : value);
     };
 
     const getTotalQuantity = () => {
         return order.reduce((sum, item) => sum + item.quantity, 0);
     };
 
-    const handleQuantityChange = (id, value) => {
+    const handleQuantityChange = (id: string, value: number) => {
         setQuantityMap((prevQuantityMap) => ({
             ...prevQuantityMap,
             [id]: value,
         }));
     };
 
-    const addToOrder = (newItem) => {
+    const addToOrder = (newItem: OrderItem) => {
         setOrder((prevOrder) => {
             const updatedOrder = [...prevOrder];
             const existingIndex = updatedOrder.findIndex((item) => item.id === newItem.id);
@@ -116,3 +136,4 @@ export default function Menu(){
     }
 };
 
+export default Menu;

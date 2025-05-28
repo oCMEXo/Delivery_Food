@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import '../../App.css';
 import {useNavigate} from "react-router-dom";
 
@@ -6,10 +6,15 @@ import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
 import {removeUser} from "../redux/slices/usersSlice.js";
 import {useDispatch} from "react-redux";
-import Menu from "../../Page/Menu.jsx";
 import {useAuth} from "../hooks/use-auth.js";
 
-export default function Header({getTotalQuantity}){
+
+interface PropsHeader {
+    getTotalQuantity: number | string;
+    order: number;
+}
+
+const Header: React.FC<PropsHeader> = ({getTotalQuantity }) => {
     const dispatch = useDispatch();
     const push = useNavigate();
     const {isAuth} = useAuth();
@@ -39,3 +44,5 @@ export default function Header({getTotalQuantity}){
         )
 
 }
+
+export default Header;
