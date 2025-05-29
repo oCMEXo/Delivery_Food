@@ -8,11 +8,9 @@ import {
     Routes,
     Route, useNavigate, Navigate, BrowserRouter,
 } from 'react-router-dom';
-import {getAuth} from "firebase/auth";
 import PrivateRoute from "./Components/hooks/PrivateRouter";
 
 const App: React.FC = () => {
-    // const auth = getAuth();
     return (
         <BrowserRouter>
             <Routes>

@@ -1,7 +1,6 @@
 import React from "react";
 import '../../App.css';
 import {useNavigate} from "react-router-dom";
-import {OrderItemMenu} from "../../Page/Menu"
 
 import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
@@ -19,7 +18,6 @@ const Header: React.FC<PropsHeader> = ({getTotalQuantity, order }) => {
     const dispatch = useDispatch();
     const push = useNavigate();
     const {isAuth} = useAuth();
-    // console.log(order);
     return (
                 <header>
                     <div className="contentHeader-Menu">
@@ -31,7 +29,7 @@ const Header: React.FC<PropsHeader> = ({getTotalQuantity, order }) => {
                                 <button onClick={() => push("/")}>Home</button>
                                 <button onClick={() => push("/menu")}>Menu</button>
                                 <button onClick={() => push("/")}>Company</button>
-                                <button onClick={() => push("/")}>UserName</button>
+                                {!isAuth ? <button onClick={() => push("/login")}>Login</button>: ''}
                                 {isAuth ? <button onClick={() => dispatch(removeUser())}>
                                     Logout
                                 </button> : ''}

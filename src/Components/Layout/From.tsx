@@ -40,7 +40,6 @@ const Form: React.FC<FormProp> = ({error, email, password, setEmail, setPassword
                                 required
                             />
                         </div>
-                        {/*{error && <div className="error-message">{error}</div>}*/}
                     </div>
                 </div>
 

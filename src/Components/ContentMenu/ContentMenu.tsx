@@ -78,7 +78,7 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
                                 <Input
                                     addToOrder={(itemWithQuantity) => {
                                         const quantity = Number(quantityMap[item.id]) || 1;
-                                        addToOrder({ ...item, quantity }); // Здесь явно передаём quantity
+                                        addToOrder({ ...item, quantity });
                                     }}                                    item={item}
                                     input={quantityMap?.[item.id] || ""}
                                     handleChange={(e) =>

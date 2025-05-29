@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 import Header from "../Components/Layout/Header";
 import OrderMainMenu from "../Components/Orders/OrderContent";
 import Footer from "../Components/Layout/Footer";
-import {useAuth} from "../Components/hooks/use-auth";
-import {useNavigate} from "react-router-dom";
 
 export interface OrderItemMenu {
     id: string;
@@ -20,8 +18,6 @@ export type OrderItemWithQuantity = OrderItemMenu & { quantity: number };
 
 const Menu: React.FC = () => {
 
-    // const {isAuth} = useAuth();
-    // const navigate = useNavigate();
 
     const [input, setInput] = useState<number>(0);
     const [order, setOrder] = useState<OrderItemMenu[]>([]);
@@ -57,15 +53,7 @@ const Menu: React.FC = () => {
 
     };
 
-    // useEffect(() => {
-    //     if (!isAuth) {
-    //         navigate("/login");
-    //     }
-    // }, [isAuth, navigate]);
-    //
-    // if (!isAuth) {
-    //     return null;
-    // }
+
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
