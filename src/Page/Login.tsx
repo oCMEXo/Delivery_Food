@@ -20,7 +20,7 @@ const Login: FC = () => {
         return emailRegex.test(value);
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!validateEmail(email)) {
@@ -31,23 +31,24 @@ const Login: FC = () => {
         setError("");
 
         const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => {
-                dispatch(
-                    setUser({
-                        email: user.email,
-                        id: user.uid,
-                        token: user.refreshToken,
-                    })
-                );
-                push("/");
-                // console.log(user);
-            })
-            .catch((err) => {
-                console.error(err);
-                setError("Неверный email или пароль.");
-            });
+        try {
+            const { user } = await signInWithEmailAndPassword(auth, email, password);
+            const token = await user.getIdToken();
+
+            dispatch(
+                setUser({
+                    email: user.email,
+                    id: user.uid,
+                    token,
+                })
+            );
+            push("/");
+        } catch (err) {
+            console.error(err);
+            setError("Неверный email или пароль.");
+        }
     };
+
     return (
         <>
             <Header />

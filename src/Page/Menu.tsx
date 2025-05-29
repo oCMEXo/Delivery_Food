@@ -20,8 +20,8 @@ export type OrderItemWithQuantity = OrderItemMenu & { quantity: number };
 
 const Menu: React.FC = () => {
 
-    const {isAuth} = useAuth();
-    const navigate = useNavigate();
+    // const {isAuth} = useAuth();
+    // const navigate = useNavigate();
 
     const [input, setInput] = useState<number>(0);
     const [order, setOrder] = useState<OrderItemMenu[]>([]);
@@ -57,15 +57,15 @@ const Menu: React.FC = () => {
 
     };
 
-    useEffect(() => {
-        if (!isAuth) {
-            navigate("/login");
-        }
-    }, [isAuth, navigate]);
-
-    if (!isAuth) {
-        return null;
-    }
+    // useEffect(() => {
+    //     if (!isAuth) {
+    //         navigate("/login");
+    //     }
+    // }, [isAuth, navigate]);
+    //
+    // if (!isAuth) {
+    //     return null;
+    // }
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
