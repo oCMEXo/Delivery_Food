@@ -1,32 +1,33 @@
+import React from "react";
 import Header from "../Components/Layout/Header.js";
-import Footer from "../Components/Layout/Footer.tsx";
-import Form from "../Components/Layout/From.tsx";
-import {useDispatch} from "react-redux";
+import Footer from "../Components/Layout/Footer";
+import Form from "../Components/Layout/From";
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-import {setUser} from "../Components/redux/slices/usersSlice.js";
+import {setUser} from "../Components/redux/slices/usersSlice";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useAppDispatch} from "../Components/hooks/redux-hooks.js";
 
-export default function CreateUser(){
-    const dispatch = useDispatch();
+const CreateUser: React.FC = () => {
+    const dispatch = useAppDispatch();
     const push = useNavigate();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState('');
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
-    const validateEmail = (value) => {
+    const validateEmail = (value: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(value);
     };
 
-    const handleCreateUser = (e) => {
+    const handleCreateUser = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!validateEmail(email)) {
-            setError('Пожалуйста, введите корректный email (пример: user@example.com)');
+            setError('Please input correct email (look at this email user@example.com)');
         } else {
             setError('');
-            console.log('Отправка email:', email);
+            console.log('Sent email:', email);
         }
 
         const auth = getAuth();
@@ -40,7 +41,14 @@ export default function CreateUser(){
                 }));
                 push("/");
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    setError("Пользователь с таким email уже зарегистрирован.");
+                } else {
+                    setError("Произошла ошибка при регистрации. Попробуйте позже.");
+                }
+                console.error(error);
+            });
     };
 
     return (
@@ -70,3 +78,5 @@ export default function CreateUser(){
         </>
     )
 }
+
+export default CreateUser;

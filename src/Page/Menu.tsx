@@ -1,41 +1,35 @@
-import React, { useState, useEffect } from "react";
-import Header from "../Components/Layout/Header.js";
-import OrderMainMenu from "../Components/Orders/OrderContent.jsx";
-import Footer from "../Components/Layout/Footer.tsx";
-import {useAuth} from "../Components/hooks/use-auth.js";
+import React, {useState, useEffect} from "react";
+import Header from "../Components/Layout/Header";
+import OrderMainMenu from "../Components/Orders/OrderContent";
+import Footer from "../Components/Layout/Footer";
+import {useAuth} from "../Components/hooks/use-auth";
 import {useNavigate} from "react-router-dom";
 
-
-
-interface Meal {
+export interface OrderItemMenu {
     id: string;
     category: string;
+    img: string;
+    meal: string;
+    price: number;
+    instructions?: string;
+    quantity?: number;
 }
 
-interface PropsHeader {
-    getTotalQuantity: number;
+export type OrderItemWithQuantity = OrderItemMenu & { quantity: number };
 
-}
-
-interface OrderItem extends Meal {
-    quantity: number;
-    order: OrderItem[];
-}
 
 const Menu: React.FC = () => {
 
-    const { isAuth } = useAuth();
+    const {isAuth} = useAuth();
     const navigate = useNavigate();
 
     const [input, setInput] = useState<number>(0);
-    const [order, setOrder] = useState<OrderItem[]>([]);
+    const [order, setOrder] = useState<OrderItemMenu[]>([]);
     const [error, setError] = useState<Error | null>(null);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [items, setItems] = useState<Meal[]>([]);
-    const [quantityMap, setQuantityMap] = useState<{[key: string]: number}>({});
-    const [currentItems, setCurrentItems] = useState<Meal[]>([]);
-
-
+    const [items, setItems] = useState<OrderItemMenu[]>([]);
+    const [quantityMap, setQuantityMap] = useState<{ [key: string]: number }>({});
+    const [currentItems, setCurrentItems] = useState<OrderItemMenu[]>([]);
 
 
     useEffect(() => {
@@ -74,39 +68,45 @@ const Menu: React.FC = () => {
     }
 
 
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value);
         setInput(isNaN(value) ? 0 : value);
     };
 
     const getTotalQuantity = () => {
-        return order.reduce((sum, item) => sum + item.quantity, 0);
+        return order.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
     };
 
-    const handleQuantityChange = (id: string, value: number) => {
+    const handleQuantityChange = (id: string, value: string) => {
+        const numericValue = parseInt(value);
         setQuantityMap((prevQuantityMap) => ({
             ...prevQuantityMap,
-            [id]: value,
+            [id]: isNaN(numericValue) ? 0 : numericValue,
         }));
     };
 
-    const addToOrder = (newItem: OrderItem) => {
+    const addToOrder = (newItem: OrderItemWithQuantity) => {
         setOrder((prevOrder) => {
             const updatedOrder = [...prevOrder];
             const existingIndex = updatedOrder.findIndex((item) => item.id === newItem.id);
 
             if (existingIndex !== -1) {
-                updatedOrder[existingIndex].quantity += newItem.quantity;
+                updatedOrder[existingIndex].quantity =
+                    (updatedOrder[existingIndex].quantity ?? 0) + newItem.quantity;
             } else {
                 updatedOrder.push(newItem);
             }
             return updatedOrder;
         });
 
-        console.log("Order:", order);
     };
+
+
+    // Check order into basket
+    // useEffect(() => {
+    //     console.log("Order updated:", order);
+    // }, [order]);
+
 
 
     if (error) {
@@ -117,7 +117,7 @@ const Menu: React.FC = () => {
 
         return (
             <>
-                <Header getTotalQuantity={getTotalQuantity()} order={order} />
+                <Header getTotalQuantity={getTotalQuantity()} order={order}/>
 
                 <OrderMainMenu
                     error={error}
@@ -130,7 +130,7 @@ const Menu: React.FC = () => {
                     handleQuantityChange={handleQuantityChange}
                     chooseCategory={chooseCategory}
                 />
-                <Footer />
+                <Footer/>
             </>
         );
     }

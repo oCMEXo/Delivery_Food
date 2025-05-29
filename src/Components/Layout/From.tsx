@@ -1,15 +1,18 @@
 import React from "react";
 
 interface FormProp {
-    error: string;
     email: string;
-    password: number;
-    setEmail: (value: string) => string;
-    setPassword: (value: string) => string;
+    setEmail: (value: string) => void;
+    password: string;
+    setPassword: (value: string) => void;
+    error: string;
 }
 
 const Form: React.FC<FormProp> = ({error, email, password, setEmail, setPassword})  => {
 
+    if (email === undefined || password === undefined) {
+        console.warn("email and password props must be initialized to empty strings.");
+    }
     return (
             <>
                 <div className="input_Info">
@@ -19,7 +22,7 @@ const Form: React.FC<FormProp> = ({error, email, password, setEmail, setPassword
                             <input
                                 type="text"
                                 id="email"
-                                value={email}
+                                value={email ?? ""}
                                 onChange={e => setEmail(e.target.value)}
                                 className={error ? 'input-error' : ''}
                                 required/>

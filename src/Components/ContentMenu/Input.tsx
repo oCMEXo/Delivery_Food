@@ -1,8 +1,24 @@
-import React from "react";
+import React, { FC, ChangeEvent } from "react";
 
-export default function Input({input, handleChange, addToOrder, item}) {
+interface OrderItem {
+    id: string;
+    img: string;
+    meal: string;
+    price: number;
+    instructions?: string;
+}
+
+interface InputProps {
+    input: string | number;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    addToOrder: (item: OrderItem & { quantity: number }) => void;
+    item: OrderItem;
+    quantityMap: { [key: string]: number | string };
+}
+
+const Input: FC<InputProps> = ({ input, handleChange, addToOrder, item }) => {
     const handleAddToOrder = () => {
-        const quantity = parseInt(input) || 0;
+        const quantity = typeof input === "string" ? parseInt(input) : input;
         if (quantity > 0) {
             addToOrder({
                 ...item,
@@ -18,7 +34,7 @@ export default function Input({input, handleChange, addToOrder, item}) {
                 placeholder="0"
                 value={input}
                 onChange={handleChange}
-                max="99"
+                max={99}
                 style={{
                     color: "black",
                     padding: "10px",
@@ -36,3 +52,4 @@ export default function Input({input, handleChange, addToOrder, item}) {
     );
 };
 
+export default Input;

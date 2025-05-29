@@ -1,23 +1,25 @@
 import React from "react";
 import '../../App.css';
 import {useNavigate} from "react-router-dom";
+import {OrderItemMenu} from "../../Page/Menu"
 
 import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
-import {removeUser} from "../redux/slices/usersSlice.js";
+import {removeUser} from "../redux/slices/usersSlice";
 import {useDispatch} from "react-redux";
-import {useAuth} from "../hooks/use-auth.js";
+import {useAuth} from "../hooks/use-auth";
 
 
 interface PropsHeader {
-    getTotalQuantity: number | string;
-    order: number;
+    getTotalQuantity?: number;
+    order?: any[];
 }
 
-const Header: React.FC<PropsHeader> = ({getTotalQuantity }) => {
+const Header: React.FC<PropsHeader> = ({getTotalQuantity, order }) => {
     const dispatch = useDispatch();
     const push = useNavigate();
     const {isAuth} = useAuth();
+    // console.log(order);
     return (
                 <header>
                     <div className="contentHeader-Menu">
