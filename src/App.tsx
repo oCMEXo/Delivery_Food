@@ -14,17 +14,12 @@ const App: React.FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/create-user" element={<CreateUser />} />
-                <Route
-                    path="/menu"
-                    element={
-                        <PrivateRoute>
-                            <Menu />
-                        </PrivateRoute>
-                    }
-                />
+                <Route path="/" element={<Home/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/create-user" element={<CreateUser/>}/>
+                <Route element={<PrivateRoute />}>
+                    <Route path="/menu" element={<Menu/>}/>
+                </Route>
             </Routes>
         </BrowserRouter>
     );
