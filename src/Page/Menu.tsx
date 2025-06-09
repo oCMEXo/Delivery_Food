@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Components/Layout/Header";
 import OrderMainMenu from "../Components/Orders/OrderContent";
 import Footer from "../Components/Layout/Footer";
-import {useAuth} from "../Components/hooks/use-auth";
+import { useAuth } from "../Components/hooks/use-auth";
 import { useNavigate } from 'react-router-dom';
 
 export interface OrderItemMenu {
@@ -53,6 +53,11 @@ const Menu: React.FC = () => {
         setCurrentItems(items);
     }, [items]);
 
+    useEffect(() => {
+        const localOrder = localStorage.getItem('order')
+        if (localOrder) setOrder(JSON.parse(localOrder))
+    }, [])
+
     const chooseCategory = (category: string) => {
         setCurrentItems(items.filter((el) => el.category === category));
 
@@ -89,6 +94,8 @@ const Menu: React.FC = () => {
             } else {
                 updatedOrder.push(newItem);
             }
+
+            localStorage.setItem('order', JSON.stringify(updatedOrder))
             return updatedOrder;
         });
 
@@ -102,32 +109,32 @@ const Menu: React.FC = () => {
 
 
 
-    if (error) {
-        return <p>Error: {error.message}</p>;
-    } else if (!isLoaded) {
-        return <p>Loading...</p>;
-    } else {
+    // if (error) {
+    // return <p>Error: {error.message}</p>;
+    // } else if (!isLoaded) {
+    // return <p>Loading...</p>;
+    // } else {
 
-        return (
-            <>
-                <Header getTotalQuantity={getTotalQuantity()} order={order}/>
+    return (
+        <>
+            <Header getTotalQuantity={getTotalQuantity()} order={order} />
 
-                <OrderMainMenu
-                    error={error}
-                    isLoaded={isLoaded}
-                    items={currentItems}
-                    addToOrder={addToOrder}
-                    input={input}
-                    handleChange={handleChange}
-                    quantityMap={quantityMap}
-                    handleQuantityChange={handleQuantityChange}
-                    chooseCategory={chooseCategory}
-                />
+            <OrderMainMenu
+                error={error}
+                isLoaded={isLoaded}
+                items={currentItems}
+                addToOrder={addToOrder}
+                input={input}
+                handleChange={handleChange}
+                quantityMap={quantityMap}
+                handleQuantityChange={handleQuantityChange}
+                chooseCategory={chooseCategory}
+            />
 
-                <Footer/>
-            </>
-        );
-    }
+            <Footer />
+        </>
+    );
+
 };
 
 export default Menu;

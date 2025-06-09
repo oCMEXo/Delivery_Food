@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import ContentMenuMain from "../ContentMenu/ContentMenu";
 import Categories_button_Navigation from "../ContentMenu/Categories_button_Navigation";
@@ -20,6 +20,7 @@ interface OrderMainMenuProps {
 
 
 const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
+                                                         isLoaded,
                                                          chooseCategory,
                                                          items,
                                                          addToOrder,
@@ -53,15 +54,20 @@ const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
             </div>
 
             <div className="buttonChoiceEating">
-                <Categories_button_Navigation chooseCategory={chooseCategory}/>
+                <Categories_button_Navigation chooseCategory={chooseCategory} />
             </div>
 
-            <ContentMenuMain
-                items={items}
-                addToOrder={addToOrder}
-                quantityMap={quantityMap}
-                handleQuantityChange={handleQuantityChange}
-            />
+            {!isLoaded
+
+                ? (<div>Loading</div>)
+                : (
+                    <ContentMenuMain
+                        items={items}
+                        addToOrder={addToOrder}
+                        quantityMap={quantityMap}
+                        handleQuantityChange={handleQuantityChange}
+                    />
+                )}
         </main>
     );
 };

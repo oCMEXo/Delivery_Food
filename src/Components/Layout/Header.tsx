@@ -14,10 +14,14 @@ interface PropsHeader {
     order?: any[];
 }
 
+
+
 const Header: React.FC<PropsHeader> = ({getTotalQuantity, order }) => {
     const dispatch = useDispatch();
     const push = useNavigate();
     const {isAuth} = useAuth();
+
+
     return (
                 <header>
                     <div className="contentHeader-Menu">
