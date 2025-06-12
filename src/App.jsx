@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Menu from "./Page/Menu.jsx";
+import Home from "./Page/Home.jsx";
 
-export default class App extends Component {
-    render() {
-        return (
-            <Menu />
-        );
-    }
+export default function App() {
+    return (
+        <Menu/>
+    );
 }

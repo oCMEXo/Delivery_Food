@@ -1,73 +1,74 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import '../../App.css';
-import {ContentMenuMain} from "../ContentMenu/ContentMenu.jsx";
-import ButtonEats from "../ContentMenu/ButtonEat.jsx";
-import bd_Order_Name from "../ContentMenu/Navigation_Tabs.js";
+import ContentMenuMain from "../ContentMenu/ContentMenu.jsx";
+import Categories_button_Navigation from "../ContentMenu/Categories_button_Navigation.jsx";
 
-export default class OrderMainMenu extends Component {
+export default function OrderMainMenu({
 
-        state = {
-            selectedButton: null,
-            isMessageVisible: false,
-        }
+                                          chooseCategory,
+                                          error,
+                                          isLoaded,
+                                          items,
+                                          addToOrder,
+                                          input,
+                                          handleChange,
+                                          quantityMap,
+                                          handleQuantityChange
+                                      }) {
+
+    const [isMessageVisible, setIsMessageVisible] = useState(false);
 
 
-    handleMouseEnter = () => {
-        this.setState({isMessageVisible: true});
+    const handleMouseEnter = () => {
+        setIsMessageVisible(true);
     };
 
-    handleMouseLeave = (e) => {
+    const handleMouseLeave = (e) => {
         e.preventDefault();
-        this.setState({isMessageVisible: false});
-    };
-
-    handleButtonClick = (buttonId) => {
-        this.setState({selectedButton: buttonId});
+        setIsMessageVisible(false);
     };
 
 
 
-    render() {
-        return (
-            <main className="mainManu">
-                <div className="infoPageMenu">
-                    <h1>Browse our menu</h1>
-                    <div className="labelMenu">
-                        Use our menu to place an order online, or
-                        <button
-                            onMouseEnter={this.handleMouseEnter}
-                            onMouseLeave={this.handleMouseLeave}
-                            className="phone"> phone</button>
-                        our store to place a pickup order. Fast and fresh food.
-                    </div>
-                    {this.state.isMessageVisible && (
-                        <div className="message">+370453020340</div>
-                    )}
+    return (
+        <main className="mainManu">
+            <div className="infoPageMenu">
+                <h1>Browse our menu</h1>
+                <div className="labelMenu">
+                    Use our menu to place an order online, or
+                    <button
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        className="phone"
+                    >
+                        phone
+                    </button>
+                    our store to place a pickup order. Fast and fresh food.
                 </div>
+                {isMessageVisible && (
+                    <div className="message">+370453020340</div>
+                )}
+            </div>
 
-                <div className="buttonChoiceEating">
-                    {bd_Order_Name.map((button) => (
-                        <ButtonEats key={button.id}
-                                    buttonText={button.text}
-                                    isSelected={this.state.selectedButton === button.id}
-                                    onClick={() => this.handleButtonClick(button.id)}
-                        />))}
-                </div>
-
-                <ContentMenuMain
-                    error={this.props.error}
-                    isLoaded={this.props.isLoaded}
-                    items={this.props.items}
-                    addToOrder={this.props.addToOrder}
-                    input={this.props.input}
-                    handleChange={this.props.handleChange}
-                    quantityMap={this.props.quantityMap}
-                    handleQuantityChange={this.props.handleQuantityChange}
-
-
+            <div className="buttonChoiceEating">
+                <Categories_button_Navigation
+                    chooseCategory={chooseCategory}
                 />
 
-            </main>
-        );
-    }
-}
+            </div>
+
+
+            <ContentMenuMain
+                error={error}
+                isLoaded={isLoaded}
+                items={items}
+                addToOrder={addToOrder}
+                input={input}
+                handleChange={handleChange}
+                quantityMap={quantityMap}
+                handleQuantityChange={handleQuantityChange}
+            />
+        </main>
+    );
+};
+
