@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import {useNavigate} from "react-router-dom";
 
 
 import Img_Home from "../../assets/IMAGE7.png";
@@ -61,6 +61,7 @@ const BeautifulFood_button = styled.button`
 
 
 export default function HomeComponent() {
+    const push = useNavigate();
     return (
         <main className="Home_Section">
             <div className="info_Section_Home">
@@ -72,7 +73,7 @@ export default function HomeComponent() {
                     <Lorem_Ipsum_p>Lorem Ipsum is simply dummy text of the printing and typesetting
                         industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.
                     </Lorem_Ipsum_p>
-                    <BeautifulFood_button>Place an Order</BeautifulFood_button>
+                    <BeautifulFood_button onClick={() => push("/menu")} >Place an Order</BeautifulFood_button>
                     <Trust_Pilot_Container>
                         <Trust_Pilot_Text>
                             <Star_Trust_Pilot_Text>

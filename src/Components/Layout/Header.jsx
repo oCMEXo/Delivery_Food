@@ -1,21 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import '../../App.css';
-
+import {useNavigate} from "react-router-dom";
 
 import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
+import {removeUser} from "../redux/slices/usersSlice.js";
+import {useDispatch} from "react-redux";
+import Menu from "../../Page/Menu.jsx";
+import {useAuth} from "../hooks/use-auth.js";
 
 export default function Header({getTotalQuantity}){
-        return (
+    const dispatch = useDispatch();
+    const push = useNavigate();
+    const {isAuth} = useAuth();
+    return (
                 <header>
                     <div className="contentHeader-Menu">
-                        <button className="logo"><img src={Logo} alt="logo" /></button>
+                        <button className="logo"
+                            onClick={() => push("/")}
+                        ><img src={Logo} alt="logo" /></button>
                         <div className="buttonHeader-Menu">
                             <div className="buttonNavigation">
-                                <a href="#">Home</a>
-                                <a href="#">Menu</a>
-                                <a href="#">Company</a>
-                                <a href="#">UserName</a>
+                                <button onClick={() => push("/")}>Home</button>
+                                <button onClick={() => push("/menu")}>Menu</button>
+                                <button onClick={() => push("/")}>Company</button>
+                                <button onClick={() => push("/")}>UserName</button>
+                                {isAuth ? <button onClick={() => dispatch(removeUser())}>
+                                    Logout
+                                </button> : ''}
                             </div>
                             <button className="yourShopping">
                                 <img src={Basket} alt="basket" />
@@ -24,6 +36,6 @@ export default function Header({getTotalQuantity}){
                         </div>
                     </div>
                 </header>
-        );
+        )
 
 }

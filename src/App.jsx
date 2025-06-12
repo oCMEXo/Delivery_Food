@@ -1,11 +1,24 @@
 import React from 'react';
-import './App.css';
 import Menu from "./Page/Menu.jsx";
 import Home from "./Page/Home.jsx";
-import Footer from "./Components/Layout/Footer.jsx";
+import Login from "./Page/Login.jsx";
+import CreateUser from "./Page/CreateUser.jsx";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from 'react-router-dom';
 
 export default function App() {
     return (
-        <Home />
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/Home" element={<Home />} />
+                <Route path="/menu" element={<Menu/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/createUser" element={<CreateUser/>}/>
+            </Routes>
+        </Router>
     );
 }
