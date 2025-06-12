@@ -1,11 +1,10 @@
-import {Component} from "react";
+import React from 'react';
 import inst from "../../assets/inst.svg";
 import Twiterr from "../../assets/twitter.svg";
 import youtube  from "../../assets/you.svg";
 import logo from "../../assets/logo.svg";
 
-export default class Footer extends Component {
-    render() {
+const Footer: React.FC = () => {
         return (
             <footer >
                 <div className="firstLevel">
@@ -51,5 +50,6 @@ export default class Footer extends Component {
             </footer>
 
         )
-    }
 }
+
+export default Footer;

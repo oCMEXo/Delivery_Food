@@ -1,15 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
 import '../../App.css';
 import {useNavigate} from "react-router-dom";
 
 import Logo from "../../assets/logo.svg";
 import Basket from "../../assets/resp.svg";
-import {removeUser} from "../redux/slices/usersSlice.js";
+import {removeUser} from "../redux/slices/usersSlice";
 import {useDispatch} from "react-redux";
-import Menu from "../../Page/Menu.jsx";
-import {useAuth} from "../hooks/use-auth.js";
+import {useAuth} from "../hooks/use-auth";
 
-export default function Header({getTotalQuantity}){
+
+interface PropsHeader {
+    getTotalQuantity?: number;
+    order?: any[];
+}
+
+const Header: React.FC<PropsHeader> = ({getTotalQuantity, order }) => {
     const dispatch = useDispatch();
     const push = useNavigate();
     const {isAuth} = useAuth();
@@ -24,7 +29,7 @@ export default function Header({getTotalQuantity}){
                                 <button onClick={() => push("/")}>Home</button>
                                 <button onClick={() => push("/menu")}>Menu</button>
                                 <button onClick={() => push("/")}>Company</button>
-                                <button onClick={() => push("/")}>UserName</button>
+                                {!isAuth ? <button onClick={() => push("/login")}>Login</button>: ''}
                                 {isAuth ? <button onClick={() => dispatch(removeUser())}>
                                     Logout
                                 </button> : ''}
@@ -39,3 +44,5 @@ export default function Header({getTotalQuantity}){
         )
 
 }
+
+export default Header;

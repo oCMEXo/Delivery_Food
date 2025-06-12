@@ -1,10 +1,19 @@
+import React from "react";
 
+interface FormProp {
+    email: string;
+    setEmail: (value: string) => void;
+    password: string;
+    setPassword: (value: string) => void;
+    error: string;
+}
 
-export default function From({error, email, password, setEmail, setPassword}) {
+const Form: React.FC<FormProp> = ({error, email, password, setEmail, setPassword})  => {
 
+    if (email === undefined || password === undefined) {
+        console.warn("email and password props must be initialized to empty strings.");
+    }
     return (
-
-
             <>
                 <div className="input_Info">
                     <div className="email">
@@ -13,7 +22,7 @@ export default function From({error, email, password, setEmail, setPassword}) {
                             <input
                                 type="text"
                                 id="email"
-                                value={email}
+                                value={email ?? ""}
                                 onChange={e => setEmail(e.target.value)}
                                 className={error ? 'input-error' : ''}
                                 required/>
@@ -31,7 +40,6 @@ export default function From({error, email, password, setEmail, setPassword}) {
                                 required
                             />
                         </div>
-                        {/*{error && <div className="error-message">{error}</div>}*/}
                     </div>
                 </div>
 
@@ -39,3 +47,5 @@ export default function From({error, email, password, setEmail, setPassword}) {
 
     )
 }
+
+export default Form;

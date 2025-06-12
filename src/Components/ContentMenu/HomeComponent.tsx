@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 
@@ -60,7 +60,7 @@ const BeautifulFood_button = styled.button`
 
 
 
-export default function HomeComponent() {
+const HomeComponent: FC = () => {
     const push = useNavigate();
     return (
         <main className="Home_Section">
@@ -93,3 +93,5 @@ export default function HomeComponent() {
         </main>
     )
 }
+
+export default HomeComponent;

@@ -1,23 +1,32 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import '../../App.css';
-import Input from "./Input.jsx";
+import Input from "./Input";
+import {OrderItemWithQuantity, OrderItemMenu, } from "./../../Page/Menu";
 
 
 
+interface ContentMenuMainProps {
+    items: OrderItemMenu[];
+    addToOrder: (item: OrderItemWithQuantity) => void;
+    quantityMap: { [key: string]: number | string };
+    handleQuantityChange: (id: string, value: string) => void;
+}
 
-export default function ContentMenuMain({ items, addToOrder, quantityMap, handleQuantityChange }) {
-    const [expandedTextId, setExpandedTextId] = useState(null);
+
+const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityMap, handleQuantityChange}) => {
+
+    const [expandedTextId, setExpandedTextId] = useState<string | null>(null);
     const [visibleBox, setVisibleBox] = useState(6);
 
     const handleVisibleSeeMore = () => {
-        setVisibleBox((prevVisibleBox) => prevVisibleBox + visibleBox);
+        setVisibleBox((prevVisibleBox) => prevVisibleBox + 6);
     };
 
-    const handleTextToggle = (id) => {
-        setExpandedTextId((prevExpandedTextId) => (prevExpandedTextId === id ? true : id));
+    const handleTextToggle = (id: string) => {
+        setExpandedTextId(prev => (prev === id ? null : id));
     };
 
-    const truncateText = (text, maxLength = 90, id) => {
+    const truncateText = (text: string, maxLength = 90, id: string) => {
         if (!text) return "";
 
         if (expandedTextId !== id) {
@@ -56,17 +65,21 @@ export default function ContentMenuMain({ items, addToOrder, quantityMap, handle
             <ul>
                 {visibleItems.map((item) => (
                     <li key={item.id}>
-                        <img src={item.img} alt={item.meal} />
+                        <img src={item.img} alt={item.meal}/>
                         <div className="contentBlog">
                             <div className="nameAndCost">
                                 <h3>{item.meal}</h3>
                                 <p>${item.price}</p>
                             </div>
-                            <p className="ipsum">{truncateText(item.instructions, 80, item.id)}</p>
+                            <p className="ipsum">
+                                {item.instructions ? truncateText(item.instructions, 80, item.id) : null}
+                            </p>
                             <div className="sizeAdd">
                                 <Input
-                                    addToOrder={addToOrder}
-                                    item={item}
+                                    addToOrder={(itemWithQuantity) => {
+                                        const quantity = Number(quantityMap[item.id]) || 1;
+                                        addToOrder({ ...item, quantity });
+                                    }}                                    item={item}
                                     input={quantityMap?.[item.id] || ""}
                                     handleChange={(e) =>
                                         handleQuantityChange(item.id, e.target.value)
@@ -87,3 +100,4 @@ export default function ContentMenuMain({ items, addToOrder, quantityMap, handle
     );
 };
 
+export default ContentMenuMain;
