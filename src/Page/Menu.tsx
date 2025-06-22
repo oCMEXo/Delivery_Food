@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../Components/Layout/Header";
 import OrderMainMenu from "../Components/Orders/OrderContent";
 import Footer from "../Components/Layout/Footer";
-import { useAuth } from "../Components/hooks/use-auth";
-import { useNavigate } from 'react-router-dom';
+import {AddToOrderProps} from "../App";
 
 export interface OrderItemMenu {
     id: string;
@@ -17,15 +16,17 @@ export interface OrderItemMenu {
 
 export type OrderItemWithQuantity = OrderItemMenu & { quantity: number };
 
+interface menuProps {
+    order: OrderItemMenu[],
+    setOrder: (orderItem: OrderItemMenu) => void,
+    addToOrder: (props: AddToOrderProps) => void,
+    getTotalQuantity: () => number,
+}
 
-const Menu: React.FC = () => {
-    // const push = useNavigate();
-    // const auth = useAuth()
-    //
-    // if()
+const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantity}) => {
+
 
     const [input, setInput] = useState<number>(0);
-    const [order, setOrder] = useState<OrderItemMenu[]>([]);
     const [error, setError] = useState<Error | null>(null);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [items, setItems] = useState<OrderItemMenu[]>([]);
@@ -64,15 +65,9 @@ const Menu: React.FC = () => {
     };
 
 
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value);
         setInput(isNaN(value) ? 0 : value);
-    };
-
-    const getTotalQuantity = () => {
-        return order.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
     };
 
     const handleQuantityChange = (id: string, value: string) => {
@@ -83,24 +78,6 @@ const Menu: React.FC = () => {
         }));
     };
 
-    const addToOrder = (newItem: OrderItemWithQuantity) => {
-        setOrder((prevOrder) => {
-            const updatedOrder = [...prevOrder];
-            const existingIndex = updatedOrder.findIndex((item) => item.id === newItem.id);
-
-            if (existingIndex !== -1) {
-                updatedOrder[existingIndex].quantity =
-                    (updatedOrder[existingIndex].quantity ?? 0) + newItem.quantity;
-            } else {
-                updatedOrder.push(newItem);
-            }
-
-            localStorage.setItem('order', JSON.stringify(updatedOrder))
-            return updatedOrder;
-        });
-
-    };
-
 
     // Check order into basket
     // useEffect(() => {
@@ -108,16 +85,9 @@ const Menu: React.FC = () => {
     // }, [order]);
 
 
-
-    // if (error) {
-    // return <p>Error: {error.message}</p>;
-    // } else if (!isLoaded) {
-    // return <p>Loading...</p>;
-    // } else {
-
     return (
         <>
-            <Header getTotalQuantity={getTotalQuantity()} order={order} />
+            <Header/>
 
             <OrderMainMenu
                 error={error}
@@ -131,7 +101,7 @@ const Menu: React.FC = () => {
                 chooseCategory={chooseCategory}
             />
 
-            <Footer />
+            <Footer/>
         </>
     );
 

@@ -14,12 +14,12 @@ interface ContentMenuMainProps {
 
 
 const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityMap, handleQuantityChange}) => {
-
+    const visibleItem = 6
     const [expandedTextId, setExpandedTextId] = useState<string | null>(null);
-    const [visibleBox, setVisibleBox] = useState(6);
+    const [visibleBox, setVisibleBox] = useState(visibleItem);
 
     const handleVisibleSeeMore = () => {
-        setVisibleBox((prevVisibleBox) => prevVisibleBox + 6);
+        setVisibleBox((prevVisibleBox) => prevVisibleBox + visibleItem);
     };
 
     const handleTextToggle = (id: string) => {

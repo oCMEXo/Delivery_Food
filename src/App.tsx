@@ -1,31 +1,44 @@
 import React, {JSX, useEffect, useState} from 'react';
-import Menu from "./Page/Menu";
+import Menu, {OrderItemMenu, OrderItemWithQuantity} from "./Page/Menu";
 import Home from "./Page/Home";
 import Login from "./Page/Login";
 import CreateUser from "./Page/CreateUser";
+import Order from "./Page/Order";
 import {
     BrowserRouter as Router,
     Routes,
     Route, useNavigate, Navigate, BrowserRouter,
 } from 'react-router-dom';
 import PrivateRoute from "./Components/hooks/PrivateRouter";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {onAuthStateChanged} from 'firebase/auth';
-import {removeUser, setUser} from './Components/redux/slices/usersSlice';
+import {addOrder, removeUser, setUser} from './Components/redux/slices/usersSlice';
 import {auth} from './fire_base.js';
+
+
+export interface AddToOrderProps {
+    newItem: OrderItemWithQuantity;
+    someOtherProp?: string;
+    anotherProp?: number;
+}
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // const [order, setOrder] = useState<OrderItemMenu[]>([]);
+
+    const order = useSelector((state) => state.users.order);
 
 
-
+    const handleAddToOrder = (item: OrderItemWithQuantity) => {
+        dispatch(addOrder(item));
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("User is logged in:", user)
+                // console.log("User is logged in:", user)
                 dispatch(setUser({
                     email: user.email,
                     id: user.uid,
@@ -55,7 +68,16 @@ const App: React.FC = () => {
                 <Route element={<PrivateRoute />}>
                     <Route path="/menu" element={
                         <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
-                            <Menu/>
+                            <Menu
+                                order={order}
+                                addToOrder={handleAddToOrder}
+                                setOrder={() => {}}
+                            />
+                        </PageLoader>
+                    }/>
+                    <Route path={"/order"} element={
+                        <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
+                        <Order />
                         </PageLoader>
                     }/>
                 </Route>
