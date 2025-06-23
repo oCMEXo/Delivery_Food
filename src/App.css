@@ -848,6 +848,7 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     gap: 35px;
     align-items: center;
+    color: var(--main-color);
     input {
         text-align: center;
         width: 45px;
