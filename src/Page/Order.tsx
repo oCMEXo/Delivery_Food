@@ -9,7 +9,7 @@ import {clearOrder} from "../Components/redux/slices/usersSlice";
 
 
 
-const Order: React.FC<PropsOrder> = () => {
+const Order: React.FC = () => {
     const dispatch = useDispatch();
     const order = useSelector(state => state.users.order);
 
