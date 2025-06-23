@@ -33,19 +33,22 @@ const Order: React.FC<PropsOrder> = () => {
         >
             <h1 className="label_order">Finish your order</h1>
             <ul className="order_list">
-                {order.map((order => (
-                <li key={order}>
-                    <div className="order_info_photo_name">
-                        <img src={order.img} alt="burder_image"/>
-                        <p>{order.meal}</p>
-                    </div>
-                    <div className="order_info_price_count">
-                        <p>${order.price}</p>
-                        <input type="number" value={order.quantity} placeholder="1"/>
-                        <button onClick={() => dispatch(clearOrder(order.id))}>X</button>
-                    </div>
-                </li>
-                )))}
+                {order.length == 0
+                    ? <div>Корзина Пуста</div>
+                    : order.map((order => (
+                            <li key={order}>
+                                <div className="order_info_photo_name">
+                                    <img src={order.img} alt="burder_image"/>
+                                    <p>{order.meal}</p>
+                                </div>
+                                <div className="order_info_price_count">
+                                    <p>${order.price}</p>
+                                    <input type="number" value={order.quantity} placeholder="1"/>
+                                    <button onClick={() => dispatch(clearOrder(order.id))}>X</button>
+                                </div>
+                            </li>
+                        )))
+                }
             </ul>
             <form className="form_Order" action="">
                 <div className="street_form">
