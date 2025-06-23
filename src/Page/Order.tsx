@@ -8,9 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearOrder} from "../Components/redux/slices/usersSlice";
 
 
-interface PropsOrder {
-    order: any
-}
 
 const Order: React.FC<PropsOrder> = () => {
     const dispatch = useDispatch();

@@ -34,7 +34,6 @@ const usersSlice = createSlice({
                 state.order.push({ ...newItem });
             }
 
-            // сохраняем в localStorage
             localStorage.setItem('order', JSON.stringify(state.order));
         },
         clearOrder(state, action) {
