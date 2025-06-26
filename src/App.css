@@ -17,7 +17,17 @@
 
 
 :root {
-    --header-color: #28224B;
+    --header-default-color: #28224B;
+    --header-dark-color: black;
+    --login-darck-color: #1e1e1e;
+    --body-dark-background-color: #121212;
+    --body-dark-color: #ffffff;
+    --CreateUser-bk-color: #444;
+    --content-order-darck-color: black;
+    --color-darck-button_messengr: #35B8BE;
+    --input-bk-color: #2a2a2a;
+    --input-color: white;
+    --input-border: 1px solid #555;
     --background-color: #35B8BE;
     --bacgroundHeader-color: #FFF;
     --max-width-width: 1440px;
@@ -35,6 +45,19 @@ body {
     align-items: center;
 }
 
+body.dark {
+    color: var(--background-color);
+
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--body-dark-background-color);
+}
+
+
+
 header {
     display: flex;
     position: fixed;
@@ -43,6 +66,10 @@ header {
     width: 100%;
     margin: 0 auto;
     justify-content: center;
+}
+
+header.dark {
+    background-color: var(--body-dark-background-color);
 }
 
 .logo {
@@ -61,6 +88,10 @@ header {
     justify-content: space-between;
 }
 
+.contentHeader-Menu.dark {
+    background-color: var(--body-dark-background-color);
+}
+
 button {
     border: none;
     background-color: unset;
@@ -77,10 +108,14 @@ button {
     position: relative;
     text-decoration: none;
     border: none;
-    color: var(--header-color);
+    color: var(--header-default-color);
     font-size: 15px;
     font-weight: 400;
     line-height: 20px;
+}
+
+.buttonNavigation button.dark {
+    color: white;
 }
 
 .buttonNavigation button:hover {
@@ -175,6 +210,8 @@ button {
     padding: 40px;
     background-color: var(--bacgroundHeader-color);
 }
+
+
 
 .pictureAndDescription {
     display: flex;
@@ -289,11 +326,17 @@ footer {
     background-position: 0 27px;
 }
 
+
+
 .firstLevel {
     padding-top: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.firstLevel.dark{
+    background-color: var(--body-dark-background-color);
 }
 
 .info {
@@ -329,6 +372,18 @@ footer {
     }
 }
 
+.infoTable li.dark {
+    button {
+        color: white;
+        border: none;
+        background-color: unset;
+        cursor: pointer;
+    }
+    h6{
+        color: white;
+    }
+}
+
 .takeaway {
 
     p {
@@ -339,6 +394,13 @@ footer {
         font-weight: 400;
         line-height: 27px; /* 180% */
         letter-spacing: 0.36px;
+    }
+}
+
+.takeaway.dark{
+    background-color: var(--body-dark-background-color);
+    p {
+        color: white;
     }
 }
 
@@ -377,8 +439,8 @@ hr {
     justify-content: space-between;
     padding: 20px 20px 50px 20px;
     align-items: center;
-
 }
+
 
 .links {
     span {
@@ -400,6 +462,13 @@ hr {
         border: 1px solid var(--border-color);
     }
 }
+.messenger.dark {
+    button{
+        background-color: var(--color-darck-button_messengr);
+        img {
+            transition: box-shadow 0.3s ease;        }
+    }
+}
 
 
 .mainManu {
@@ -412,6 +481,12 @@ hr {
     background-image: url("assets/BG Shape Content.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+.mainManu.dark {
+    background-color: var(--body-dark-background-color);
+    background-image: none;
+
 }
 
 .infoPageMenu {
@@ -532,11 +607,23 @@ hr {
     }
 }
 
+.mainManu ul li.dark{
+    background-color: var(--body-dark-background-color);
+
+    box-shadow: 1px 1px 10px 1px white;
+}
+
+
 .contentBlog {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+.contentBlog.dark{
+    background-color: var(--body-dark-background-color);
 }
 
 .ipsum {
@@ -649,6 +736,10 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: center;
 }
 
+.Home_Section.dark {
+    background-image: none;
+}
+
 .info_Section_Home {
     width: 100%;
     max-width: var(--max-width-width);
@@ -679,7 +770,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 .login-font {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     height: 800px;
     display: flex;
     flex-direction: column;
@@ -700,6 +792,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+
 .login-font form {
     width: 695px;
     height: 283px;
@@ -712,6 +805,26 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+
+.login-font form.dark {
+    background-color: var(--login-darck-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    label {
+        color: white;
+    };
+    input {
+        background-color: var(--input-bk-color);
+        border: var(--input-bk-color);
+        color: var(--input-color);
+    }
+    .cancel {
+        background-color: var(--CreateUser-bk-color);
+        color: var(--input-color);
+        border: none;
+    }
 }
 
 .login-font form {
@@ -800,8 +913,15 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: column;
     align-items: center;
     padding-top: 85px;
+    margin-top: 85px;
+    background-image: url('assets/BG Shape Content.png'); /* замените на правильный путь */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-    /*justify-content: center;*/
+.section_order.dark {
+    background-image: none;
 }
 
 .label_order {
@@ -832,6 +952,18 @@ input[type="number"]::-webkit-outer-spin-button {
         justify-content: space-between;
         padding: 0  20px 0 20px;
     }
+}
+
+.order_list li.dark {
+    background-color: var(--body-dark-background-color);
+    box-shadow: 1px 1px 10px 1px white;
+    border-radius: 15px;
+    .order_info_photo_name {
+        p {
+            color: white;
+        }
+    }
+
 }
 
 .order_info_photo_name {
@@ -892,6 +1024,12 @@ input[type="number"]::-webkit-outer-spin-button {
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+}
+
+.form_Order.dark {
+    label {
+        color: white;
     }
 }
 

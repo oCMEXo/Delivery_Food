@@ -1,38 +1,49 @@
-import React from "react";
+import React, {useContext} from "react";
 import Footer from "../Components/Layout/Footer";
 import Header from "../Components/Layout/Header";
 
 
-import BG_Shape from "../assets/BG Shape Content.png"
 import {useDispatch, useSelector} from "react-redux";
 import {clearOrder} from "../Components/redux/slices/usersSlice";
+import {ThemeContext} from "../Components/ThemeContext/ThemeContext";
+import {useNavigate} from "react-router-dom";
 
 
 
 const Order: React.FC = () => {
     const dispatch = useDispatch();
     const order = useSelector(state => state.users.order);
+    const push = useNavigate();
+    const context = useContext(ThemeContext);
+
+
+
+    if (!context) return null;
+    const { theme, toggleTheme } = context;
 
 
     console.log(order);
     return <>
         <Header/>
         <section
-            className="section_order"
-            style={{
-                marginTop: '85px',
-                backgroundImage: `url(${BG_Shape})`,
-                backgroundSize: '100% 100%',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-            }}
+            className={`section_order ${theme === 'dark' ? 'dark' : ''}`}
+
         >
             <h1 className="label_order">Finish your order</h1>
             <ul className="order_list">
                 {order.length == 0
-                    ? <div>Корзина Пуста</div>
+                    ? <div style={{
+                        display: "flex",
+                        gap: "10px",
+                        padding: "90px",
+                        fontSize: "30px",
+                    }}>Your Basket Empty Lets'go making<p style={{
+                        fontSize: "30px",
+                        borderBottom: '1px solid #fff',
+                        cursor: 'pointer'
+                    }} onClick={() => push('/menu')}>Order!</p></div>
                     : order.map((order => (
-                            <li key={order}>
+                            <li className={`.order_list li ${theme === 'dark' ? 'dark' : ''}`} key={order}>
                                 <div className="order_info_photo_name">
                                     <img src={order.img} alt="burder_image"/>
                                     <p>{order.meal}</p>
@@ -46,7 +57,7 @@ const Order: React.FC = () => {
                         )))
                 }
             </ul>
-            <form className="form_Order" action="">
+            <form className={`form_Order ${theme === 'dark' ? 'dark' : ''}`} action="">
                 <div className="street_form">
                     <label htmlFor="street">Street</label>
                     <input type="text" name="street" id="street"/>

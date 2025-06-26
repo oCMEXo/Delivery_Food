@@ -34,6 +34,8 @@ const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantit
     const [currentItems, setCurrentItems] = useState<OrderItemMenu[]>([]);
 
 
+
+
     useEffect(() => {
         const URL_MEALS = "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals";
         fetch(URL_MEALS)
