@@ -26,7 +26,6 @@ const App: React.FC = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    // const [order, setOrder] = useState<OrderItemMenu[]>([]);
 
     const order = useSelector((state) => state.users.order);
 
@@ -71,7 +70,6 @@ const App: React.FC = () => {
                             <Menu
                                 order={order}
                                 addToOrder={handleAddToOrder}
-                                setOrder={() => {}}
                             />
                         </PageLoader>
                     }/>

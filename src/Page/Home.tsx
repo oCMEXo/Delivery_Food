@@ -10,15 +10,12 @@ interface HomeProps {
     getTotalQuantity: () => number,
 }
 
-const Home: React.FC<HomeProps> = ({order, getTotalQuantity}) => {
+const Home: React.FC<HomeProps> = () => {
 
 
     return (
         <>
-            <Header
-                // getTotalQuantity={getTotalQuantity()}
-                // order={order}
-            />
+            <Header/>
             <HomeComponent />
             <Footer />
         </>
