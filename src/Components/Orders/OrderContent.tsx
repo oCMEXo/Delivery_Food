@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import '../../App.css';
 import ContentMenuMain from "../ContentMenu/ContentMenu";
-import Categories_button_Navigation from "../ContentMenu/Categories_button_Navigation";
+import CategoriesButtonNavigation from "../ContentMenu/Categories_button_Navigation";
 import { OrderItemWithQuantity, OrderItemMenu } from "./../../Page/Menu"
 import {ThemeContext} from "../ThemeContext/ThemeContext";
 
@@ -39,7 +39,7 @@ const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
     const context = useContext(ThemeContext);
     if (!context) return null;
 
-    const { theme, toggleTheme } = context;
+    const { theme } = context;
 
     return (
         <main  className={`mainManu ${theme === 'dark' ? 'dark' : ''}`}>
@@ -60,7 +60,7 @@ const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
             </div>
 
             <div className="buttonChoiceEating">
-                <Categories_button_Navigation chooseCategory={chooseCategory} />
+                <CategoriesButtonNavigation chooseCategory={chooseCategory} />
             </div>
 
             {!isLoaded

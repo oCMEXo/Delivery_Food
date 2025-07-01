@@ -15,6 +15,7 @@ import {onAuthStateChanged} from 'firebase/auth';
 import {addOrder, removeUser, setUser} from './Components/redux/slices/usersSlice';
 import {auth} from './fire_base.js';
 import {ThemeProvider} from "./Components/ThemeContext/ThemeContext";
+import PageLoader from './Components/ContentMenu/PageLoader';
 
 
 export interface AddToOrderProps {
@@ -27,7 +28,6 @@ const App: React.FC = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    // const [order, setOrder] = useState<OrderItemMenu[]>([]);
 
     const order = useSelector((state) => state.users.order);
 
@@ -73,8 +73,7 @@ const App: React.FC = () => {
                                 <Menu
                                     order={order}
                                     addToOrder={handleAddToOrder}
-                                    setOrder={() => {
-                                    }}
+                                    setOrder={() => {}}
                                 />
                             </PageLoader>
                         }/>
@@ -92,16 +91,6 @@ const App: React.FC = () => {
 }
 
 
-function PageLoader({children, isLoading, isLoggedIn}) {
-    if (isLoading)
-        return (
-            <div className=''>
-                Loading
-            </div>
-        )
-    if (!isLoggedIn) return <Navigate to='/login'/>
-    return children as JSX.Element
-}
 
 
 export default App;
