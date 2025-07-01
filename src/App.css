@@ -15,6 +15,7 @@
     align-items: center;
 }
 
+
 :root {
     --header-color: #28224B;
     --background-color: #35B8BE;
@@ -58,7 +59,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 button {
@@ -790,4 +790,121 @@ input[type="number"]::-webkit-outer-spin-button {
 .error-message {
     color: red;
     font-size: 0.9rem;
+}
+
+
+.section_order {
+    width: 100%;
+    min-height: 820px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 85px;
+
+    /*justify-content: center;*/
+}
+
+.label_order {
+    color: var(--main-color);
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 55px; /* 110% */
+    letter-spacing: 1.65px;
+}
+
+.order_list {
+    margin-top: 45px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    li {
+        width: 1180px;
+        height: 200px;
+        flex-shrink: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        /*flex-direction: column;*/
+        justify-content: space-between;
+        padding: 0  20px 0 20px;
+    }
+}
+
+.order_info_photo_name {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    img{
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.order_info_price_count {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    color: var(--main-color);
+    input {
+        text-align: center;
+        width: 45px;
+        height: 35px;
+        margin-left: 25px;
+        border-radius: 6px;
+        border: 1px solid #DDD;
+        background: #FAFAFA;
+        /*padding: 10px 20px;*/
+    }
+    button {
+        padding: 10px 20px;
+        background-color: var(--main-color);
+        border-radius: 6px;
+        color: #fff;
+    }
+}
+
+.form_Order {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+    label {
+        color: #08090A;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 111.111% */
+        letter-spacing: 0.6px;
+    }
+    input {
+        border-radius: 6px;
+        border: 1px solid #DDD;
+        background: #FAFAFA;
+        width: 430px;
+        height: 45px;
+    }
+    .street_form .house_form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.street_form, .house_form {
+    display: flex;
+    align-items: center;
+    gap: 130px;
+}
+
+button[type="submit"] {
+    background-color: var(--main-color);
+    border-radius: 8px;
+    width: 147px;
+    height: 52px;
+    color: white;
 }
