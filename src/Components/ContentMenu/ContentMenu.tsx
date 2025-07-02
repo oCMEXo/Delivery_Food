@@ -25,7 +25,7 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
     const context = useContext(ThemeContext);
     if (!context) return null;
 
-    const { theme, toggleTheme } = context;
+    const { theme } = context;
 
     const handleVisibleSeeMore = () => {
         setVisibleBox((prevVisibleBox) => prevVisibleBox + visibleItem);
