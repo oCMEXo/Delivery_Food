@@ -82,6 +82,7 @@ const App: React.FC = () => {
                         <Route path={"/order"} element={
                             <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
                                 <Order/>
+
                             </PageLoader>
                         }/>
                     </Route>
