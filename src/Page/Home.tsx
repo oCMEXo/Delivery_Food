@@ -8,6 +8,7 @@ import Footer from "../Components/Layout/Footer";
 const Home: React.FC = () => {
 
 
+
     return (
         <>
             <Header/>

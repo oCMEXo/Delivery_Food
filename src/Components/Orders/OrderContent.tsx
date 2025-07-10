@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import '../../App.css';
 import ContentMenuMain from "../ContentMenu/ContentMenu";
 import CategoriesButtonNavigation from "../ContentMenu/Categories_button_Navigation";
+
 import { OrderItemWithQuantity, OrderItemMenu } from "./../../Page/Menu"
 import {ThemeContext} from "../ThemeContext/ThemeContext";
 
@@ -61,6 +62,7 @@ const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
 
             <div className="buttonChoiceEating">
                 <CategoriesButtonNavigation chooseCategory={chooseCategory} />
+
             </div>
 
             {!isLoaded

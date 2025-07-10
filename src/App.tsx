@@ -62,7 +62,9 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={
                         <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
+
                             <Home/>
+
                         </PageLoader>
                     }/>
                     <Route path="/login" element={<Login/>}/>
