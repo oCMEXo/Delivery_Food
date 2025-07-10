@@ -1,9 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 
 
 import Img_Home from "../../assets/IMAGE7.png";
+import {ThemeContext} from "../ThemeContext/ThemeContext";
 
 
 const BeautifulFood_span = styled.span`
@@ -61,13 +62,24 @@ const BeautifulFood_button = styled.button`
 
 
 const HomeComponent: FC = () => {
+    const context = useContext(ThemeContext);
+    if (!context) return null;
+
+    const { theme, toggleTheme } = context;
     const push = useNavigate();
+
+    const isDark = theme === 'dark';
+
+    const boxStyle = {
+        color: isDark ? 'white' : '#08090A',
+
+    };
     return (
-        <main className="Home_Section">
+        <main className={`Home_Section ${theme === 'dark' ? 'dark' : ''}`}>
             <div className="info_Section_Home">
                 <div className="beautifulFood">
 
-                    <BeautifulFood_h1>
+                    <BeautifulFood_h1 style={boxStyle}>
                         Beautiful food & takeaway, <BeautifulFood_span>delivered</BeautifulFood_span> to your door.
                     </BeautifulFood_h1>
                     <Lorem_Ipsum_p>Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -75,15 +87,15 @@ const HomeComponent: FC = () => {
                     </Lorem_Ipsum_p>
                     <BeautifulFood_button onClick={() => push("/menu")} >Place an Order</BeautifulFood_button>
                     <Trust_Pilot_Container>
-                        <Trust_Pilot_Text>
+                        <Trust_Pilot_Text style={boxStyle}>
                             <Star_Trust_Pilot_Text>
                                 <BeautifulFood_span>
                                 ★
                                 </BeautifulFood_span>
-                            </Star_Trust_Pilot_Text>
+                            </Star_Trust_Pilot_Text >
                             Trustpilot
                         </Trust_Pilot_Text>
-                        <p><BeautifulFood_span>4.8 out of 5</BeautifulFood_span> based on 2000+ reviews</p>
+                        <p style={boxStyle}><BeautifulFood_span >4.8 out of 5</BeautifulFood_span> based on 2000+ reviews</p>
                     </Trust_Pilot_Container>
                 </div>
                 <div className="img_Home">

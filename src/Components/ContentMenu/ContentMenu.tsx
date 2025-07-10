@@ -1,7 +1,8 @@
-import React, {FC, useState} from "react";
+import React, {FC, useContext, useState} from "react";
 import '../../App.css';
 import Input from "./Input";
 import {OrderItemWithQuantity, OrderItemMenu, } from "./../../Page/Menu";
+import {ThemeContext} from "../ThemeContext/ThemeContext";
 
 
 
@@ -13,10 +14,18 @@ interface ContentMenuMainProps {
 }
 
 
+
+
 const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityMap, handleQuantityChange}) => {
     const visibleItem = 6
     const [expandedTextId, setExpandedTextId] = useState<string | null>(null);
     const [visibleBox, setVisibleBox] = useState(visibleItem);
+
+
+    const context = useContext(ThemeContext);
+    if (!context) return null;
+
+    const { theme, toggleTheme } = context;
 
     const handleVisibleSeeMore = () => {
         setVisibleBox((prevVisibleBox) => prevVisibleBox + visibleItem);
@@ -64,9 +73,9 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
         <>
             <ul>
                 {visibleItems.map((item) => (
-                    <li key={item.id}>
+                    <li  key={item.id} className={`.mainManu ul li ${theme === 'dark' ? 'dark' : ''}`}>
                         <img src={item.img} alt={item.meal}/>
-                        <div className="contentBlog">
+                        <div className={`contentBlog ${theme === 'dark' ? 'dark' : ''}`}>
                             <div className="nameAndCost">
                                 <h3>{item.meal}</h3>
                                 <p>${item.price}</p>
@@ -76,7 +85,7 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
                             </p>
                             <div className="sizeAdd">
                                 <Input
-                                    addToOrder={(itemWithQuantity) => {
+                                    addToOrder={() => {
                                         const quantity = Number(quantityMap[item.id]) || 1;
                                         addToOrder({ ...item, quantity });
                                     }}                                    item={item}

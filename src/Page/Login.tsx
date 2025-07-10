@@ -1,4 +1,4 @@
-import React, {FC,  useState } from "react";
+import React, {FC, useContext, useState} from "react";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
 import Form from "../Components/Layout/From";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../Components/hooks/redux-hooks";
 import { setUser } from "../Components/redux/slices/usersSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {ThemeContext} from "../Components/ThemeContext/ThemeContext";
 
 const Login: FC = () => {
     const dispatch = useAppDispatch();
@@ -14,6 +15,12 @@ const Login: FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>("");
+
+    const context = useContext(ThemeContext);
+    if (!context) return null;
+
+    const { theme, toggleTheme } = context;
+
 
     const validateEmail = (value: string): boolean => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,9 +59,11 @@ const Login: FC = () => {
     return (
         <>
             <Header />
-            <section className="login-font">
+            <section  className={`login-font ${theme === 'dark' ? 'dark' : ''}`}>
                 <h1>Login</h1>
-                <form onSubmit={handleSubmit}>
+                <form
+                        className={`.login-font form ${theme === 'dark' ? 'dark' : ''}`}
+                        onSubmit={handleSubmit}>
                     <Form
                         email={email}
                         setEmail={setEmail}

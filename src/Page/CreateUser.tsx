@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Header from "../Components/Layout/Header.js";
 import Footer from "../Components/Layout/Footer";
 import Form from "../Components/Layout/From";
@@ -7,6 +7,7 @@ import {setUser} from "../Components/redux/slices/usersSlice";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useAppDispatch} from "../Components/hooks/redux-hooks.js";
+import {ThemeContext} from "../Components/ThemeContext/ThemeContext";
 
 const CreateUser: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -14,6 +15,13 @@ const CreateUser: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
+
+
+    const context = useContext(ThemeContext);
+    if (!context) return null;
+
+    const { theme, toggleTheme } = context;
+
 
     const validateEmail = (value: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,9 +62,11 @@ const CreateUser: React.FC = () => {
     return (
         <>
             <Header />
-            <section className="login-font">
+            <section  className={`login-font ${theme === 'dark' ? 'dark' : ''}`}>
                 <h1>Create User</h1>
-                <form onSubmit={handleCreateUser}>
+                <form
+                    className={`.login-font form ${theme === 'dark' ? 'dark' : ''}`}
+                    onSubmit={handleCreateUser}>
                     <Form
                         email={email}
                         setEmail={setEmail}
