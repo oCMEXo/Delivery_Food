@@ -72,11 +72,21 @@ const Menu: React.FC<menuProps> = ({ setOrder, addToOrder, }) => {
 
     const handleQuantityChange = (id: string, value: string) => {
         const numericValue = parseInt(value);
-        setQuantityMap((prevQuantityMap) => ({
-            ...prevQuantityMap,
-            [id]: isNaN(numericValue) ? 0 : numericValue,
-        }));
+
+        if (isNaN(numericValue)) {
+            setQuantityMap((prevQuantityMap) => ({
+                ...prevQuantityMap,
+                [id]: 0,
+            }));
+        } else if (numericValue < 101) {
+            setQuantityMap((prevQuantityMap) => ({
+                ...prevQuantityMap,
+                [id]: numericValue,
+            }));
+        }
+
     };
+
 
 
     // Check order into basket

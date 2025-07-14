@@ -17,6 +17,7 @@ import {auth} from './fire_base.js';
 import {ThemeProvider} from "./Components/ThemeContext/ThemeContext";
 import PageLoader from './Components/ContentMenu/PageLoader';
 import NotFoundPage from "./Page/404/NotFoundPage";
+import ScrollToTop from "./Components/hooks/ScrollToTop";
 
 
 export interface AddToOrderProps {
@@ -30,7 +31,7 @@ const App: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const order = useSelector((state) => state.users.order);
+    const order = useSelector((state: any) => state.users.order);
 
 
     const handleAddToOrder = (item: OrderItemWithQuantity) => {
@@ -57,9 +58,13 @@ const App: React.FC = () => {
 
         return () => unsubscribe()
     }, [dispatch])
+
+
+
     return (
         <ThemeProvider>
             <BrowserRouter>
+                <ScrollToTop/>
                 <Routes>
                     <Route path="/" element={
                         <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>

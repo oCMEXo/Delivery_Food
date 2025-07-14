@@ -17,6 +17,24 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({ input, handleChange, addToOrder, item }) => {
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+
+        // Пустой ввод допустим (пока стирают число)
+        if (value === '') {
+            handleChange(e);
+            return;
+        }
+
+        // Разрешаем только числа до 100
+        const numericValue = parseInt(value);
+        if (!isNaN(numericValue) && numericValue <= 100) {
+            handleChange(e);
+        }
+    };
+
+
     const handleAddToOrder = () => {
         const quantity = typeof input === "string" ? parseInt(input) : input;
         if (quantity > 0) {
@@ -34,7 +52,8 @@ const Input: FC<InputProps> = ({ input, handleChange, addToOrder, item }) => {
                 placeholder="0"
                 value={input}
                 onChange={handleChange}
-
+                min={1}
+                max={100}
                 style={{
                     textAlign: 'center',
                     color: "black",

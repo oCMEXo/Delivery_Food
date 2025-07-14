@@ -45,7 +45,7 @@ const Header: React.FC<PropsHeader> = ({order}) => {
                                     <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => push("/login")}>Login</button>
                                 )}
                                 <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={toggleTheme}>
-                                    {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+                                    {theme === 'light' ? 'Dark' : 'Light'}
                                 </button>
                             </div>
                             <button className="yourShopping" onClick={() => push("/order", {state: order} )}>

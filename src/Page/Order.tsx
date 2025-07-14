@@ -1,13 +1,12 @@
-import React, {useContext} from "react";
+import React, {ChangeEvent, useContext, useMemo, useState} from "react";
 import Footer from "../Components/Layout/Footer";
 import Header from "../Components/Layout/Header";
 
 
 import {useDispatch, useSelector} from "react-redux";
-import {clearOrder} from "../Components/redux/slices/usersSlice";
+import {clearOrder, decreaseQuantity, incrementQuantity} from "../Components/redux/slices/usersSlice";
 import {ThemeContext} from "../Components/ThemeContext/ThemeContext";
 import {useNavigate} from "react-router-dom";
-
 
 
 const Order: React.FC = () => {
@@ -17,9 +16,30 @@ const Order: React.FC = () => {
     const context = useContext(ThemeContext);
 
 
+    const [inputValueStreet, setInputValueStreet] = useState("");
+    const [inputValueHouse, setInputValueHouse] = useState("");
+
+
+    const handleChangeStreet = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValueStreet(e.target.value);
+    };
+    const handleChangeHouse = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValueHouse(e.target.value);
+    };
+
+    const handleSubmitFinalOrder = (e: React.FormEvent) => {
+        e.preventDefault(); // предотврати перезагрузку страницы
+        alert(`Final order submitted! Total: $${totalPrice.toFixed(2)}`);
+        alert(`${inputValueStreet}: ${inputValueHouse}`);
+    }
+
+    const totalPrice = useMemo(() => {
+        return order.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    }, [order]);
+
 
     if (!context) return null;
-    const { theme, toggleTheme } = context;
+    const {theme, toggleTheme} = context;
 
 
     console.log(order);
@@ -30,43 +50,78 @@ const Order: React.FC = () => {
 
         >
             <h1 className="label_order">Finish your order</h1>
-            <ul className="order_list">
-                {order.length == 0
-                    ? <div style={{
-                        display: "flex",
-                        gap: "10px",
-                        padding: "90px",
-                        fontSize: "30px",
-                    }}>Your Basket Empty Lets'go making<p style={{
-                        fontSize: "30px",
-                        borderBottom: '1px solid #fff',
-                        cursor: 'pointer'
-                    }} onClick={() => push('/menu')}>Order!</p></div>
-                    : order.map((order => (
+            <form className={`form_Order ${theme === 'dark' ? 'dark' : ''}`} action="">
+                <ul className="order_list">
+                    {order.length == 0
+                        ? <div style={{
+                            display: "flex",
+                            gap: "10px",
+                            padding: "90px",
+                            fontSize: "30px",
+                        }}>Your Basket Empty Lets'go making<p style={{
+                            fontSize: "30px",
+                            borderBottom: '1px solid #fff',
+                            cursor: 'pointer'
+                        }} onClick={() => push('/menu')}>Order!</p></div>
+                        : order.map((order => (
+
                             <li className={`.order_list li ${theme === 'dark' ? 'dark' : ''}`} key={order}>
                                 <div className="order_info_photo_name">
                                     <img src={order.img} alt="burder_image"/>
                                     <p>{order.meal}</p>
                                 </div>
                                 <div className="order_info_price_count">
-                                    <p>${order.price}</p>
-                                    <input type="number" value={order.quantity} placeholder="1"/>
-                                    <button onClick={() => dispatch(clearOrder(order.id))}>X</button>
+                                    <p>${(order.price * order.quantity).toFixed(2)}</p>
+
+                                    <button style={{}} onClick={(e) => {
+                                        e.preventDefault();
+                                        dispatch(incrementQuantity(order.id))
+                                    }}>+
+                                    </button>
+                                    <input style={{
+                                        width: "50px",
+                                        marginLeft: '0'
+                                    }} type="number" value={order.quantity}/>
+                                    <button disabled={order.quantity <= 1} onClick={(e) => {
+                                        e.preventDefault();
+                                        dispatch(decreaseQuantity(order.id))
+                                    }}>-
+                                    </button>
+                                    <button onClick={(e) => {
+                                        e.preventDefault();
+                                        dispatch(clearOrder(order.id))
+                                    }}>X
+                                    </button>
                                 </div>
                             </li>
                         )))
-                }
-            </ul>
-            <form className={`form_Order ${theme === 'dark' ? 'dark' : ''}`} action="">
+                    }
+
+                </ul>
+                <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
                 <div className="street_form">
                     <label htmlFor="street">Street</label>
-                    <input type="text" name="street" id="street"/>
+                    <input
+                        style={{
+                            padding: "10px",
+                            outline: "none",
+                        }}
+                        type="text" name="street" id="street"
+                        value={inputValueStreet}
+                        onChange={handleChangeStreet}/>
                 </div>
                 <div className="house_form">
                     <label htmlFor="house">House</label>
-                    <input type="text" name="house" id="house"/>
+                    <input
+                        style={{
+                            padding: "10px",
+                            outline: '0',
+                        }}
+                        type="text" name="house" id="house"
+                           value={inputValueHouse}
+                           onChange={handleChangeHouse}/>
                 </div>
-                <button type="submit">Order</button>
+                <button onClick={handleSubmitFinalOrder} type={'submit'}>Order</button>
             </form>
         </section>
         <Footer/>;

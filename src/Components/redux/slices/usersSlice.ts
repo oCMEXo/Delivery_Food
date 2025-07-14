@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {OrderItemWithQuantity} from '../../../Page/Menu';
+import React from "react";
 
 interface UserState {
     email: string | null;
@@ -8,27 +9,44 @@ interface UserState {
     order: OrderItemWithQuantity[];
 }
 
-const initialState: UserState = {
-    email: null,
-    token: null,
-    id: null,
-    order: [],
+
+const getInitialState = (): UserState => {
+    const savedUser = localStorage.getItem('user');
+    const parsedUser = savedUser ? JSON.parse(savedUser) : null;
+
+    const order = JSON.parse(localStorage.getItem('order') || '[]');
+
+    return {
+        email: parsedUser?.email ?? null,
+        token: parsedUser?.token ?? null,
+        id: parsedUser?.id ?? null,
+        order,
+    };
 };
+
 
 const usersSlice = createSlice({
     name: 'users',
-    initialState,
+    initialState: getInitialState(),
     reducers: {
         setUser(state, action: PayloadAction<{ email: string; token: string; id: string }>) {
             state.email = action.payload.email;
             state.token = action.payload.token;
             state.id = action.payload.id;
+
+            localStorage.setItem('user', JSON.stringify({
+                email: state.email,
+                token: state.token,
+                id: state.id,
+            }));
         },
         removeUser(state) {
             state.email = null;
             state.token = null;
             state.id = null;
             state.order = [];
+            localStorage.removeItem('user');
+
         },
         addOrder(state, action: PayloadAction<OrderItemWithQuantity>) {
             const newItem = action.payload;
@@ -47,11 +65,26 @@ const usersSlice = createSlice({
             state.order = state.order.filter(item => item.id !== idToRemove);
             localStorage.setItem('order', JSON.stringify(state.order));
         },
+        decreaseQuantity(state, action: PayloadAction<string>) {
+            const item = state.order.find(item => item.id === action.payload);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+            }
+            localStorage.setItem('order', JSON.stringify(state.order));
+        },
+        incrementQuantity(state, action: PayloadAction<string>) {
+            const item = state.order.find(item => item.id === action.payload);
+            if (item && item.quantity >= 1) {
+                item.quantity += 1;
+            }
+
+            localStorage.setItem('order', JSON.stringify(state.order));
+        }
     },
 });
 
 export const selectTotalQuantity = (state: { users: UserState }) =>
-    state.users.order.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
+    (state.users.order ?? []).reduce((sum, item) => sum + (item.quantity ?? 0), 0);
 
-export const {setUser, removeUser, addOrder, clearOrder} = usersSlice.actions;
+export const {setUser, removeUser, addOrder, clearOrder, decreaseQuantity, incrementQuantity} = usersSlice.actions;
 export default usersSlice.reducer;

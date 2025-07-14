@@ -62,7 +62,24 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
             );
         }
 
-        return text;
+        return (
+            <>
+                {text}{" "}
+                <button
+                    style={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                        color: "black",
+                    }}
+                    onClick={() => handleTextToggle(id)}
+                >
+                    <div className={`read-more ${theme === 'dark' ? 'dark' : ''}`}>
+                        (Read less)
+                    </div>
+                </button>
+            </>
+        );
     };
 
 
