@@ -51,12 +51,20 @@ const usersSlice = createSlice({
         addOrder(state, action: PayloadAction<OrderItemWithQuantity>) {
             const newItem = action.payload;
             const existingIndex = state.order.findIndex(item => item.id === newItem.id);
+            const maxQuantity = 999
 
             if (existingIndex !== -1) {
                 state.order[existingIndex].quantity += newItem.quantity;
+                if (state.order[existingIndex].quantity > maxQuantity) {
+                    state.order[existingIndex].quantity = maxQuantity;
+                }
             } else {
-                state.order.push({...newItem});
+                state.order.push({
+                    ...newItem,
+                    quantity: Math.min(newItem.quantity, maxQuantity),
+                });
             }
+
 
             localStorage.setItem('order', JSON.stringify(state.order));
         },
