@@ -3,6 +3,8 @@ import Header from "../Components/Layout/Header";
 import OrderMainMenu from "../Components/Orders/OrderContent";
 import Footer from "../Components/Layout/Footer";
 import {AddToOrderProps} from "../App";
+import NotFoundPage from "./404/NotFoundPage";
+import {URL_MEALS} from "../__mock__/__mock__";
 
 export interface OrderItemMenu {
     id: string;
@@ -20,10 +22,9 @@ interface menuProps {
     order: OrderItemMenu[],
     setOrder: (orderItem: OrderItemMenu) => void,
     addToOrder: (props: AddToOrderProps) => void,
-    getTotalQuantity: () => number,
 }
 
-const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantity}) => {
+const Menu: React.FC<menuProps> = ({ setOrder, addToOrder, }) => {
 
 
     const [input, setInput] = useState<number>(0);
@@ -34,10 +35,7 @@ const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantit
     const [currentItems, setCurrentItems] = useState<OrderItemMenu[]>([]);
 
 
-
-
     useEffect(() => {
-        const URL_MEALS = "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals";
         fetch(URL_MEALS)
             .then((res) => res.json())
             .then(
@@ -50,7 +48,7 @@ const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantit
                     setError(error);
                 }
             );
-    }, []);
+        }, [URL_MEALS]);
 
     useEffect(() => {
         setCurrentItems(items);
@@ -91,17 +89,21 @@ const Menu: React.FC<menuProps> = ({order, setOrder, addToOrder, getTotalQuantit
         <>
             <Header/>
 
-            <OrderMainMenu
-                error={error}
-                isLoaded={isLoaded}
-                items={currentItems}
-                addToOrder={addToOrder}
-                input={input}
-                handleChange={handleChange}
-                quantityMap={quantityMap}
-                handleQuantityChange={handleQuantityChange}
-                chooseCategory={chooseCategory}
-            />
+            {error
+                ? (<div style={{paddingTop: "120px",}}><NotFoundPage error={error}/></div>)
+                : (
+                    <OrderMainMenu
+                        error={error}
+                        isLoaded={isLoaded}
+                        items={currentItems}
+                        addToOrder={addToOrder}
+                        input={input}
+                        handleChange={handleChange}
+                        quantityMap={quantityMap}
+                        handleQuantityChange={handleQuantityChange}
+                        chooseCategory={chooseCategory}
+                    />
+                )}
 
             <Footer/>
         </>

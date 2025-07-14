@@ -1,9 +1,9 @@
 import React, {FC, useContext, useState} from "react";
 import '../../App.css';
 import Input from "./Input";
-import {OrderItemWithQuantity, OrderItemMenu, } from "./../../Page/Menu";
+import {OrderItemWithQuantity, OrderItemMenu,} from "./../../Page/Menu";
 import {ThemeContext} from "../ThemeContext/ThemeContext";
-
+import {visibleItem} from "../../__mock__/__mock__";
 
 
 interface ContentMenuMainProps {
@@ -14,10 +14,7 @@ interface ContentMenuMainProps {
 }
 
 
-
-
 const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityMap, handleQuantityChange}) => {
-    const visibleItem = 6
     const [expandedTextId, setExpandedTextId] = useState<string | null>(null);
     const [visibleBox, setVisibleBox] = useState(visibleItem);
 
@@ -25,7 +22,7 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
     const context = useContext(ThemeContext);
     if (!context) return null;
 
-    const { theme } = context;
+    const {theme} = context;
 
     const handleVisibleSeeMore = () => {
         setVisibleBox((prevVisibleBox) => prevVisibleBox + visibleItem);
@@ -53,7 +50,9 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
                                 }}
                                 onClick={() => handleTextToggle(id)}
                             >
-                                (Read more...)
+                                <div className={`read-more ${theme === 'dark' ? 'dark' : ''}`}>
+                                    (Read more...)
+                                </div>
                             </button>
                         </>
                     ) : (
@@ -65,6 +64,7 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
 
         return text;
     };
+
 
     const visibleItems = items.slice(0, visibleBox);
     const MoreItems = visibleBox < items.length;
@@ -87,8 +87,8 @@ const ContentMenuMain: FC<ContentMenuMainProps> = ({items, addToOrder, quantityM
                                 <Input
                                     addToOrder={() => {
                                         const quantity = Number(quantityMap[item.id]) || 1;
-                                        addToOrder({ ...item, quantity });
-                                    }}                                    item={item}
+                                        addToOrder({...item, quantity});
+                                    }} item={item}
                                     input={quantityMap?.[item.id] || ""}
                                     handleChange={(e) =>
                                         handleQuantityChange(item.id, e.target.value)

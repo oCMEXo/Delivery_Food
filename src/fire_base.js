@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"
-// import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_APP_FIREBACE_API_KEY,
     authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,

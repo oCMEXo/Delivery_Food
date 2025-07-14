@@ -16,6 +16,7 @@ import {addOrder, removeUser, setUser} from './Components/redux/slices/usersSlic
 import {auth} from './fire_base.js';
 import {ThemeProvider} from "./Components/ThemeContext/ThemeContext";
 import PageLoader from './Components/ContentMenu/PageLoader';
+import NotFoundPage from "./Page/404/NotFoundPage";
 
 
 export interface AddToOrderProps {
@@ -86,7 +87,7 @@ const App: React.FC = () => {
                             </PageLoader>
                         }/>
                     </Route>
-
+                    <Route path={'error'} element={<NotFoundPage/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

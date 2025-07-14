@@ -34,14 +34,15 @@ const Input: FC<InputProps> = ({ input, handleChange, addToOrder, item }) => {
                 placeholder="0"
                 value={input}
                 onChange={handleChange}
-                max={99}
+
                 style={{
+                    textAlign: 'center',
                     color: "black",
                     padding: "10px",
                     display: "flex",
                     alignContent: "center",
                     justifyContent: "center",
-                    width: "30px",
+                    width: "50px",
                     borderRadius: "6px",
                     border: "1px solid #DDD",
                     background: "#FAFAFA",
