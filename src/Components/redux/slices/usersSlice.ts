@@ -71,7 +71,7 @@ const usersSlice = createSlice({
         clearOrder(state, action: PayloadAction<string>) {
             const idToRemove = action.payload;
             state.order = state.order.filter(item => item.id !== idToRemove);
-            localStorage.setItem('order', JSON.stringify(state.order));
+            localStorage.removeItem('order');
         },
         decreaseQuantity(state, action: PayloadAction<string>) {
             const item = state.order.find(item => item.id === action.payload);

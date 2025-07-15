@@ -27,10 +27,12 @@ const Order: React.FC = () => {
         setInputValueHouse(e.target.value);
     };
 
-    const handleSubmitFinalOrder = (e: React.FormEvent) => {
-        e.preventDefault(); // предотврати перезагрузку страницы
+    const handleSubmitFinalOrder = async (e: React.FormEvent) =>  {
+        // e.preventDefault(); // предотврати перезагрузку страницы
         alert(`Final order submitted! Total: $${totalPrice.toFixed(2)}`);
+        alert(`${JSON.stringify(order)}`)
         alert(`${inputValueStreet}: ${inputValueHouse}`);
+        dispatch(clearOrder())
     }
 
     const totalPrice = useMemo(() => {
@@ -121,7 +123,7 @@ const Order: React.FC = () => {
                            value={inputValueHouse}
                            onChange={handleChangeHouse}/>
                 </div>
-                <button onClick={handleSubmitFinalOrder} type={'submit'}>Order</button>
+                <button onClick={handleSubmitFinalOrder} type='submit'>Order</button>
             </form>
         </section>
         <Footer/>;
