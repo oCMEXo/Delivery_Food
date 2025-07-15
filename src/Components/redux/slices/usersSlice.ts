@@ -73,6 +73,10 @@ const usersSlice = createSlice({
             state.order = state.order.filter(item => item.id !== idToRemove);
             localStorage.removeItem('order');
         },
+        clearOrderAll(state) {
+            state.order = [];
+            localStorage.removeItem('order');
+        },
         decreaseQuantity(state, action: PayloadAction<string>) {
             const item = state.order.find(item => item.id === action.payload);
             if (item && item.quantity > 1) {
@@ -94,5 +98,5 @@ const usersSlice = createSlice({
 export const selectTotalQuantity = (state: { users: UserState }) =>
     (state.users.order ?? []).reduce((sum, item) => sum + (item.quantity ?? 0), 0);
 
-export const {setUser, removeUser, addOrder, clearOrder, decreaseQuantity, incrementQuantity} = usersSlice.actions;
+export const {setUser, removeUser, addOrder, clearOrder, decreaseQuantity, incrementQuantity, clearOrderAll} = usersSlice.actions;
 export default usersSlice.reducer;

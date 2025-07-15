@@ -1,10 +1,10 @@
-import React, {ChangeEvent, useContext, useMemo, useState} from "react";
+import React, {ChangeEvent, FormEvent, useContext, useMemo, useState} from "react";
 import Footer from "../Components/Layout/Footer";
 import Header from "../Components/Layout/Header";
 
 
 import {useDispatch, useSelector} from "react-redux";
-import {clearOrder, decreaseQuantity, incrementQuantity} from "../Components/redux/slices/usersSlice";
+import {clearOrder, clearOrderAll, decreaseQuantity, incrementQuantity} from "../Components/redux/slices/usersSlice";
 import {ThemeContext} from "../Components/ThemeContext/ThemeContext";
 import {useNavigate} from "react-router-dom";
 
@@ -27,13 +27,39 @@ const Order: React.FC = () => {
         setInputValueHouse(e.target.value);
     };
 
-    const handleSubmitFinalOrder = async (e: React.FormEvent) =>  {
-        // e.preventDefault(); // предотврати перезагрузку страницы
-        alert(`Final order submitted! Total: $${totalPrice.toFixed(2)}`);
-        alert(`${JSON.stringify(order)}`)
-        alert(`${inputValueStreet}: ${inputValueHouse}`);
-        dispatch(clearOrder())
-    }
+    const handleSubmitFinalOrder = async (e: FormEvent) => {
+
+        e.preventDefault();
+
+        const orderData = {
+            street: inputValueStreet,
+            house: inputValueHouse,
+            totalPrice: totalPrice,
+            orderItems: order
+        };
+
+        try {
+            const response = await fetch('http://localhost:5178/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Заказ успешно создан:', data);
+            dispatch(clearOrderAll());
+            push('/')
+
+        } catch (error: any) {
+            console.error('Ошибка при отправке заказа:', error.message);
+        }
+    };
+
+
 
     const totalPrice = useMemo(() => {
         return order.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -41,10 +67,10 @@ const Order: React.FC = () => {
 
 
     if (!context) return null;
-    const {theme, toggleTheme} = context;
+    const {theme} = context;
 
 
-    console.log(order);
+    // console.log(order);
     return <>
         <Header/>
         <section
@@ -52,7 +78,7 @@ const Order: React.FC = () => {
 
         >
             <h1 className="label_order">Finish your order</h1>
-            <form className={`form_Order ${theme === 'dark' ? 'dark' : ''}`} action="">
+            <form onSubmit={handleSubmitFinalOrder} className={`form_Order ${theme === 'dark' ? 'dark' : ''}`} action="">
                 <ul className="order_list">
                     {order.length == 0
                         ? <div style={{
@@ -67,7 +93,7 @@ const Order: React.FC = () => {
                         }} onClick={() => push('/menu')}>Order!</p></div>
                         : order.map((order => (
 
-                            <li className={`.order_list li ${theme === 'dark' ? 'dark' : ''}`} key={order}>
+                            <li className={`.order_list li ${theme === 'dark' ? 'dark' : ''}`} key={order.id}>
                                 <div className="order_info_photo_name">
                                     <img src={order.img} alt="burder_image"/>
                                     <p>{order.meal}</p>
@@ -110,7 +136,9 @@ const Order: React.FC = () => {
                         }}
                         type="text" name="street" id="street"
                         value={inputValueStreet}
-                        onChange={handleChangeStreet}/>
+                        onChange={handleChangeStreet}
+                        required
+                    />
                 </div>
                 <div className="house_form">
                     <label htmlFor="house">House</label>
@@ -121,9 +149,11 @@ const Order: React.FC = () => {
                         }}
                         type="text" name="house" id="house"
                            value={inputValueHouse}
-                           onChange={handleChangeHouse}/>
+                           onChange={handleChangeHouse}
+                        required
+                    />
                 </div>
-                <button onClick={handleSubmitFinalOrder} type='submit'>Order</button>
+                <button type="submit">Order</button>
             </form>
         </section>
         <Footer/>;
