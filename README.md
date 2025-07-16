@@ -83,10 +83,11 @@ Jest is configured with `ts-jest` for testing TypeScript components.
 - Redux Toolkit
 - Vite
 - Jest
-- CSS Modules (or SCSS if used)
+- CSS Modules
 - ThemeContext API
 - PostgreSQL
 - REST
+- Node.js
 
 ---
 
