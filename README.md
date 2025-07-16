@@ -38,26 +38,31 @@ src/
 
 ## ⚙️ Getting Started
 
-1. Clone the repository:
+### 1. Clone the repository:
 
 ```
 git clone git@github.com:oCMEXo/SDC_React_TheBest.git
 cd SDC_React_TheBest
 ```
 
-2. Install dependencies:
+### 2. Install dependencies:
 
 ```
 npm install
 ```
 
-3. Start the development server:
+### 3. Start the development server:
 
 ```
 npm run dev
 ```
-
 > Powered by **Vite** for lightning-fast development.
+
+### 4. Start Backend Server
+
+```aiignore
+node Api.js
+```
 
 ---
 
@@ -80,6 +85,8 @@ Jest is configured with `ts-jest` for testing TypeScript components.
 - Jest
 - CSS Modules (or SCSS if used)
 - ThemeContext API
+- PostgreSQL
+- REST
 
 ---
 
