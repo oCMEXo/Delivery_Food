@@ -28,7 +28,7 @@ const Order: React.FC = () => {
     };
 
     const handleSubmitFinalOrder = async (e: FormEvent) => {
-
+        console.time("submitFinalOrder")
         e.preventDefault();
 
         const orderData = {
@@ -57,6 +57,7 @@ const Order: React.FC = () => {
         } catch (error: any) {
             console.error('Ошибка при отправке заказа:', error.message);
         }
+        console.timeEnd('submitFinalOrder')
     };
 
 
