@@ -16,13 +16,13 @@ const pool = new Pool({
 
 
 app.post('/order', async (req, res) => {
-    console.log('Получены данные заказа:', req.body);
+    console.log('Get data order:', req.body);
 
     try {
         const { street, house, totalPrice, orderItems } = req.body;
 
         if (!street || !house || totalPrice === undefined || totalPrice === null || !Array.isArray(orderItems) || orderItems.length === 0) {
-            return res.status(400).json({ error: 'Отсутствуют необходимые поля или некорректный формат orderItems' });
+            return res.status(400).json({ error: 'Empty must line or not correct format orderItems' });
         }
 
         const result = await pool.query(
@@ -32,7 +32,7 @@ app.post('/order', async (req, res) => {
 
         res.status(201).json(result.rows[0]);
     } catch (err) {
-        console.error('Ошибка при создании заказа:', err);
+        console.error('Order creating error:', err);
         res.status(500).json({ error: 'Ошибка при создании заказа' });
     }
 });

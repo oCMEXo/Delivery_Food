@@ -1,5 +1,6 @@
 import {Navigate} from "react-router-dom";
 import React, {FC, JSX} from "react";
+import Loading from "../Loading/loading";
 
 interface PageLoaderProps {
     children: React.ReactNode;
@@ -10,9 +11,7 @@ interface PageLoaderProps {
 const PageLoader: FC<PageLoaderProps> = ({children, isLoading, isLoggedIn}) => {
     if (isLoading)
         return (
-            <div className=''>
-                Loading
-            </div>
+            <Loading/>
         )
     if (!isLoggedIn) return <Navigate to='/login'/>
     return children as JSX.Element
