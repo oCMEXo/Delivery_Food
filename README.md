@@ -60,7 +60,9 @@ npm run dev
 
 ### 4. Start Backend Server
 
-```aiignore
+```
+cd .\Api
+
 node Api.js
 ```
 
