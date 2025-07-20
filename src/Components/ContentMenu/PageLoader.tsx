@@ -6,12 +6,13 @@ interface PageLoaderProps {
     children: React.ReactNode;
     isLoading: boolean;
     isLoggedIn: boolean;
+    message: string;
 }
 
-const PageLoader: FC<PageLoaderProps> = ({children, isLoading, isLoggedIn}) => {
+const PageLoader: FC<PageLoaderProps> = ({children, isLoading, isLoggedIn, message}) => {
     if (isLoading)
         return (
-            <Loading/>
+            <Loading message={message} />
         )
     if (!isLoggedIn) return <Navigate to='/login'/>
     return children as JSX.Element

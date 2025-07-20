@@ -4,15 +4,13 @@ interface LoadingOverlayProps {
   message?: string
 }
 
-export function LoadingOverlay({ message = "Загрузка страницы..." }: LoadingOverlayProps) {
+export function LoadingOverlay({ message }: LoadingOverlayProps) {
   return (
     <div className={styles.loadingOverlay}>
       <div className={styles.contentContainer}>
-        {/* Spinning 'e' logo */}
-        <div className={styles.spinner}>
-          
-        </div>
-        {/* Loading message */}
+        
+        <div className={styles.spinner}></div>
+        
         <p className={styles.message}>{message}</p>
       </div>
     </div>

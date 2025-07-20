@@ -67,7 +67,7 @@ const App: React.FC = () => {
                 <ScrollToTop/>
                 <Routes>
                     <Route path="/" element={
-                        <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
+                        <PageLoader message='Loading...' isLoading={loading} isLoggedIn={isLoggedIn}>
 
                             <Home/>
 

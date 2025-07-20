@@ -5,6 +5,7 @@ import CategoriesButtonNavigation from "../ContentMenu/Categories_button_Navigat
 
 import { OrderItemWithQuantity, OrderItemMenu } from "./../../Page/Menu"
 import {ThemeContext} from "../ThemeContext/ThemeContext";
+import Loading from "../Loading/loading";
 
 
 
@@ -67,7 +68,7 @@ const OrderMainMenu: React.FC<OrderMainMenuProps> = ({
 
             {!isLoaded
 
-                ? (<div>Loading</div>)
+                ? (<h3 style={{ paddingTop: '40px'}} >Loading...</h3>)
                 : (
                     <ContentMenuMain
                         items={items}
