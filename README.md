@@ -59,7 +59,7 @@ npm run dev
 ```
 > Powered by **Vite** for lightning-fast development.
 
-### 4. Start Backend Server
+### 4. Open a new terminal, run the command to start the Backend server.
 
 ```
 cd .\Api
