@@ -10,12 +10,11 @@ interface PageLoaderProps {
 }
 
 const PageLoader: FC<PageLoaderProps> = ({children, isLoading, isLoggedIn, message}) => {
-    if (isLoading)
-        return (
-            <Loading message={message} />
-        )
-    if (!isLoggedIn) return <Navigate to='/login'/>
-    return children as JSX.Element
+    if (isLoading) {
+        return <Loading message={message || "Loading..."} />;
+    }
+
+    return children as JSX.Element;
 }
 
 export default PageLoader;

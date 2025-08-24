@@ -75,8 +75,10 @@ const App: React.FC = () => {
 
                         </PageLoader>
                     }/>
+
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/create-user" element={<CreateUser/>}/>
+
                     <Route element={<PrivateRoute/>}>
                         <Route path="/menu" element={
                             <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
@@ -94,7 +96,7 @@ const App: React.FC = () => {
                             </PageLoader>
                         }/>
                     </Route>
-                    <Route path="/pepw" element={<NotFoundPage />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
