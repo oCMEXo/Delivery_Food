@@ -30,7 +30,7 @@
     --input-border: 1px solid #555;
     --background-color: #35B8BE;
     --bacgroundHeader-color: #FFF;
-    --max-width-width: 1440px;
+    --max-width-width: 1200px;
     --min-width-width: 1000px;
     --main-color: #35B8BE;
     --color-color: #08090A;
@@ -43,6 +43,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-color: red;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
 }
 
 body.dark {
@@ -79,7 +91,7 @@ header.dark {
 }
 
 .contentHeader-Menu {
-    padding: 10px 15px;
+    padding: 10px 10px 15px 10px;
     width: 100%;
     max-width: var(--max-width-width);
     min-width: var(--min-width-width);
@@ -314,6 +326,7 @@ footer {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: var(--max-width-width);
     min-width: var(--min-width-width);
     height: auto;
     background-color: #F5FBFC;
@@ -329,10 +342,10 @@ footer {
 
 
 .firstLevel {
-    padding-top: 100px;
+    padding: 100px 10px 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .firstLevel.dark{
