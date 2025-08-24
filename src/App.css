@@ -332,11 +332,18 @@ footer {
     background-color: #F5FBFC;
     z-index: 1;
     align-content: center;
-
+    color: black;
     background-image: url("assets/points.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: 0 27px;
+}
+
+footer.dark {
+
+    background-image: none;
+    color: white;
+    background-color: var(--body-dark-background-color) !important;
 }
 
 

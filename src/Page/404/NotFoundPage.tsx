@@ -8,7 +8,9 @@ interface PageProps {
 
 const NotFoundPage: FC<PageProps> = ({error}) => {
     const push = useNavigate()
-
+    if (error) {
+        console.log(error.message)
+    }
     return (
         <main className="NotFoundPage-main">
             <div className="container">

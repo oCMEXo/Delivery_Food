@@ -39,7 +39,7 @@ const Header: React.FC<PropsHeader> = ({order}) => {
                                 <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => push("/")}>Home</button>
                                 <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => push("/menu")}>Menu</button>
                                 {isAuth ? (
-                                    <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => dispatch(removeUser())}>Logout</button>
+                                    <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => { dispatch(removeUser()); push("/")}}>Logout</button>
                                 ) : (
                                     <button className={`buttonNavigation button ${theme === 'dark' ? 'dark' : ''}`} onClick={() => push("/login")}>Login</button>
                                 )}

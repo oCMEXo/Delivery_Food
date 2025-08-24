@@ -6,6 +6,8 @@ import logo from "../../assets/logo.svg";
 import {ThemeContext} from "../ThemeContext/ThemeContext";
 import {useNavigate} from "react-router-dom";
 
+import points from "../../assets/points.png";
+
 const Footer: React.FC = () => {
     const push = useNavigate();
 
@@ -15,26 +17,10 @@ const Footer: React.FC = () => {
     const { theme } = context;
     const isDark = theme === 'dark';
 
-    const footerStyle = {
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column' as const,
-        width: '100%',
-        minWidth: 'var(--min-width-width)',
-        height: 'auto',
-        zIndex: 1,
-        color: isDark ? 'white': "black",
-        alignContent: 'center',
-        backgroundColor: isDark ? '#111' : '#F5FBFC',
-        backgroundImage: isDark ? 'url("assets/points.png")' : '',
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: '0 27px',
 
-    };
 
     return (
-            <footer style={footerStyle}>
+            <footer className={isDark ? 'dark' : ''}>
                 <div className={`firstLevel ${theme === 'dark' ? 'dark' : ''}`}>
                     <div className={`takeaway ${theme === 'dark' ? 'dark' : ''}`}>
                         <img src={logo} alt="logo"/>
@@ -62,7 +48,6 @@ const Footer: React.FC = () => {
                             </li>
                         </ul>
                     </div>
-
                 </div>
                 <hr/>
                 <div className="webflow" >

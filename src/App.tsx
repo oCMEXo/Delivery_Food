@@ -1,12 +1,13 @@
-import React, { useEffect, useState} from 'react';
-import Menu, { OrderItemWithQuantity} from "./Page/Menu";
+import React, {JSX, useEffect, useState} from 'react';
+import Menu, {OrderItemMenu, OrderItemWithQuantity} from "./Page/Menu";
 import Home from "./Page/Home";
 import Login from "./Page/Login";
 import CreateUser from "./Page/CreateUser";
 import Order from "./Page/Order";
 import {
+    BrowserRouter as Router,
     Routes,
-    Route, BrowserRouter,
+    Route, useNavigate, Navigate, BrowserRouter,
 } from 'react-router-dom';
 import PrivateRoute from "./Components/hooks/PrivateRouter";
 import {useDispatch, useSelector} from 'react-redux';
@@ -36,6 +37,8 @@ const App: React.FC = () => {
     const handleAddToOrder = (item: OrderItemWithQuantity) => {
         dispatch(addOrder(item));
     };
+
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -84,14 +87,14 @@ const App: React.FC = () => {
                                 />
                             </PageLoader>
                         }/>
-                        <Route path={"/order"} element={
+                        <Route path="/order" element={
                             <PageLoader isLoading={loading} isLoggedIn={isLoggedIn}>
                                 <Order/>
 
                             </PageLoader>
                         }/>
                     </Route>
-                    <Route path={'error'} element={<NotFoundPage/>}/>
+                    <Route path="/pepw" element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

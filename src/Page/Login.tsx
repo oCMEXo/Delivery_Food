@@ -19,7 +19,7 @@ const Login: FC = () => {
     const context = useContext(ThemeContext);
     if (!context) return null;
 
-    const { theme, toggleTheme } = context;
+    const { theme } = context;
 
 
     const validateEmail = (value: string): boolean => {
@@ -35,7 +35,7 @@ const Login: FC = () => {
             return;
         }
 
-        setError("");
+        setError(error);
 
         const auth = getAuth();
         try {
